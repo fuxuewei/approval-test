@@ -1,0 +1,131 @@
+---
+description: MuseDAM global styles enforcement. ANY globals.css (create/modify/check) must use this exact content.
+globs: **/globals.css, **/*.css
+---
+
+# MuseDAM globals.css Enforcement (Highest Priority)
+
+## Trigger Conditions
+- Mention of globals.css, color, theme, Dark Mode, primary, background, border.
+- New project/component when globals.css missing or incorrect.
+- Any reskin or design restoration.
+
+## Forced Content (overwrite completely – no old Ant colors allowed)
+```css
+/* ==================== MuseDAM Design System 颜色（100% aligned with designer guidelines.mdc） ==================== */
+:root {
+  /* Light Mode */
+  --background: #F7F9FC;                    /* basic light 100 */
+  --card: #FFFFFF;                          /* basic light 000 */
+  --popover: #FFFFFF;
+  --modal: #FFFFFF;
+  --border: #E4E9F2;                        /* basic light 300 */
+  --input: #FFFFFF;
+
+  --foreground: #192038;                    /* basic light 800 - all headings/body/labels */
+  --muted-foreground: #8F9BB3;              /* basic light 500 - secondary/placeholder */
+  --tertiary-foreground: #8F9BB3;
+
+  --primary: #3366FF;                       /* primary 600 */
+  --primary-foreground: #FFFFFF;
+
+  /* Primary full scale */
+  --ant-primary-1: #F2F6FF;
+  --ant-primary-2: #D9E4FF;
+  --ant-primary-5: #598BFF;
+  --ant-primary-6: #3366FF;
+  --ant-primary-7: #274BDB;
+
+  /* Basic Light */
+  --ant-basic-0: #FFFFFF;
+  --ant-basic-1: #F7F9FC;
+  --ant-basic-3: #E4E9F2;
+  --ant-basic-5: #8F9BB3;
+
+  /* Semantic full */
+  --ant-success-1: #EDFFF3;
+  --ant-success-6: #00E096;
+  --ant-success-7: #00B283;
+  --ant-danger-1: #FFF2F2;
+  --ant-danger-6: #FF3D71;
+  --ant-danger-7: #DB2C66;
+  --ant-warning-1: #FFFDF2;
+  --ant-warning-6: #FFAA00;
+  --ant-warning-7: #DB8B00;
+  --ant-info-1: #F2F8FF;
+  --ant-info-6: #0095FF;
+  --ant-info-7: #006FD6;
+
+  /* Disabled */
+  --disabled-bg: #EDF1F7;
+  --disabled-text: #8F9BB3;
+}
+
+.dark {
+  /* Dark Mode */
+  --background: #1F1F1F;                    /* basic dark 100 */
+  --card: #262626;                          /* basic dark 200 */
+  --popover: #141414;
+  --modal: #141414;
+  --border: #595959;                        /* basic dark 400 */
+  --input: #1F1F1F;
+
+  --foreground: #FAFAFA;                    /* basic dark 900 */
+  --muted-foreground: #BFBFBF;              /* basic dark 600 */
+  --tertiary-foreground: #8C8C8C;
+
+  --primary: #3366FF;
+  --primary-foreground: #FFFFFF;
+
+  /* Primary same */
+  --ant-primary-1: #F2F6FF;
+  --ant-primary-2: #D9E4FF;
+  --ant-primary-5: #598BFF;
+  --ant-primary-6: #3366FF;
+  --ant-primary-7: #274BDB;
+
+  /* Basic Dark full */
+  --ant-basic-0: #141414;
+  --ant-basic-1: #1F1F1F;
+  --ant-basic-2: #262626;
+  --ant-basic-3: #434343;
+  --ant-basic-4: #595959;
+  --ant-basic-5: #8C8C8C;
+  --ant-basic-6: #BFBFBF;
+  --ant-basic-9: #FAFAFA;
+
+  /* Semantic same */
+  --ant-success-1: #EDFFF3;
+  --ant-success-6: #00E096;
+  --ant-success-7: #00B283;
+  --ant-danger-1: #FFF2F2;
+  --ant-danger-6: #FF3D71;
+  --ant-danger-7: #DB2C66;
+  --ant-warning-1: #FFFDF2;
+  --ant-warning-6: #FFAA00;
+  --ant-warning-7: #DB8B00;
+  --ant-info-1: #F2F8FF;
+  --ant-info-6: #0095FF;
+  --ant-info-7: #006FD6;
+
+  /* Disabled */
+  --disabled-bg: #434343;
+  --disabled-text: #8C8C8C;
+}
+
+/* Focus Ring (exact match) */
+textarea:focus, textarea:focus-visible,
+input:focus, input:focus-visible,
+select:focus, select:focus-visible {
+  border-color: #3366FF;
+  box-shadow: 0 0 0 2px rgba(89,139,255,0.2);
+}
+.dark textarea:focus,
+.dark input:focus,
+.dark select:focus {
+  box-shadow: 0 0 0 2px rgba(89,139,255,0.3);
+}
+
+/* Dropdown/Modal Shadow */
+:root { --shadow-dropdown: 0 6px 21px 8px rgba(87,98,114,0.07), 0 0 12px rgba(87,98,114,0.15), 0 4px 10px -4px rgba(46,58,89,0.19); }
+.dark { --shadow-dropdown: 0 6px 21px 8px rgba(0,0,0,0.2), 0 0 12px rgba(0,0,0,0.3); }

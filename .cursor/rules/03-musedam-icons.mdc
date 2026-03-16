@@ -1,0 +1,77 @@
+---
+description: MANDATORY for Icon handling. Enforces Figma → icons-core → TSX 组件标准化流程.
+globs: **/*.{tsx,jsx}
+---
+
+# MuseDAM Icon Sync
+
+## 1. 目录结构（标准化）
+
+```
+src/icons-core/              # 图标核心（未来可拆包）
+├── assets/*.svg             # Figma 同步的源 SVG
+├── components/[Name]Icon.tsx # 自动生成的 TSX 组件
+├── types.ts                 # 共享类型
+└── index.ts                 # 统一导出（自动生成）
+
+src/components/icons/        # 业务使用入口
+├── index.ts                 # 从 icons-core re-export
+├── NavIcons.tsx             # 特殊图标组件（保留）
+└── DefaultAvatar.tsx        # 其他特殊图标
+```
+
+## 2. Asset Configuration
+- FILE_ID: NQ3UwPscfsmbcDpUqafpsW
+- TARGET_CANVAS: Foundations
+- Naming: match Icons/ prefix or exact name.
+- 输出目录: `src/icons-core/assets/`
+
+## 3. Mandatory Workflow（Figma → TSX）
+
+### 3.1 同步 Figma 图标（设计更新时执行）
+```bash
+pnpm icons:pull
+```
+流程：
+1. 调用 Figma API 获取 Icons 画布组件
+2. 导出为 SVG → 保存到 `src/icons-core/assets/[Name].svg`
+3. 自动调用 `svg-to-tsx` 生成 TSX 组件
+
+### 3.2 仅生成 TSX（已有 SVG 时）
+```bash
+pnpm icons:build
+```
+流程：
+1. 读取 `src/icons-core/assets/*.svg`
+2. 生成 `src/icons-core/components/[Name]Icon.tsx`
+3. 更新 `src/icons-core/index.ts` 统一导出
+
+### 3.3 使用图标（业务代码）
+```tsx
+// 统一入口
+import { CloseIcon, SearchIcon } from "@/components/icons";
+
+<CloseIcon className="w-4 h-4" size={20} />
+```
+
+## 4. SVG 标准化规范
+- 移除硬编码 fill/stroke
+- 使用 `fill="currentColor"` 或 `stroke="currentColor"`
+- viewBox 保持原始值（通常是 "0 0 36 36"）
+- 组件接受 `size?: number | string` 和 `className` 属性
+
+## 5. Fallback Mechanism
+- **Priority 1**: Figma → icons-core 组件（业务图标）
+  - 使用 `pnpm icons:pull` 同步
+  - 通过 `@/components/icons` 导入
+- **Priority 2**: lucide-react（通用 UI 图标）
+  - 直接使用 `import { Search, Settings } from "lucide-react"`
+  - 无需同步，即拿即用
+- **Priority 3**: 临时/调试图标
+  - 使用 `SvgIcon` 从 `public/icons/` 动态加载
+  - 仅用于开发期，稳定后应移入 icons-core
+
+## 6. 禁止事项
+- Never guess SVG paths
+- Never use emojis for functional icons
+- 不要在业务代码中直接引用 `src/icons-core/`，统一使用 `@/components/icons`

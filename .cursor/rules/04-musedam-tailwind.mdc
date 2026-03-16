@@ -1,0 +1,42 @@
+---
+description: MuseDAM + Tailwind v4 + shadcn best practices. Force globals.css variables.
+globs: **/*.{tsx,jsx}
+---
+
+# MuseDAM Tailwind v4 Production Rules
+
+## 1. Color Rules (MANDATORY)
+All colors MUST come from globals.css variables. Never edit tailwind.config.js.
+
+- bg-background, bg-card, text-foreground, text-muted-foreground, border-border, bg-primary, text-primary, etc.
+- Arbitrary values for extra tokens:
+  - hover:bg-[var(--ant-primary-5)]
+  - active:bg-[var(--ant-primary-7)]
+  - bg-[var(--ant-primary-1)]
+  - text-[var(--ant-success-6)], bg-[var(--ant-success-1)]
+  - text-[var(--ant-danger-6)], etc.
+  - text-[var(--ant-warning-6)]
+
+Strictly forbidden:
+- Hard hex (`text-[#192038]`, `bg-[#3366FF]`)
+- Old muse- colors
+- Tailwind default grays
+
+## 2. Spacing & Layout
+- Only gap-1 (4px) to gap-12 (48px)
+- All containers: flex + gap + p-4/p-6 (no m- between siblings)
+- Content area: max-w-7xl mx-auto or w-full
+
+## 3. Radius
+- Button/Input: rounded-[6px]
+- Card: rounded-[8px]
+- Modal: rounded-[12px]
+- Default: rounded-md
+
+## 4. Typography (exact designer scale)
+- Page title: text-[22px] leading-[32px] font-semibold
+- Card title: text-[20px] leading-[28px] font-semibold
+- Section title: text-[18px] leading-[24px] font-semibold
+- Button/Label/Table header: text-[14px] leading-[22px] font-medium
+- Body: text-[14px] leading-[22px]
+- Helper: text-[13px] leading-[18px] text-muted-foreground

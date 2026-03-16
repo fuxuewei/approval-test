@@ -1,0 +1,29 @@
+import { cn } from "@/lib/utils";
+import React from "react";
+
+export interface UploadOutlinedIconProps extends React.SVGProps<SVGSVGElement> {
+  size?: number | string;
+}
+
+export const UploadOutlinedIcon = React.forwardRef<SVGSVGElement, UploadOutlinedIconProps>(
+  ({ className, size = 16, ...props }, ref) => {
+    return (
+      <svg
+        ref={ref}
+        viewBox="0 0 36 36"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        width={typeof size === "number" ? size : undefined}
+        height={typeof size === "number" ? size : undefined}
+        className={cn("inline-block shrink-0", typeof size === "string" && size, className)}
+        {...props}
+      >
+        <path d="M13.4997 10.2059H16.4689V23.7983C16.4689 23.9751 16.6135 24.1197 16.7903 24.1197H19.201C19.3778 24.1197 19.5225 23.9751 19.5225 23.7983V10.2059H22.4997C22.7689 10.2059 22.9175 9.89652 22.7528 9.68759L18.2528 3.99027C18.2227 3.95185 18.1843 3.92078 18.1405 3.89942C18.0966 3.87805 18.0485 3.86694 17.9997 3.86694C17.9509 3.86694 17.9028 3.87805 17.8589 3.89942C17.815 3.92078 17.7766 3.95185 17.7466 3.99027L13.2466 9.68358C13.0818 9.89652 13.2305 10.2059 13.4997 10.2059ZM32.705 22.593H30.2943C30.1175 22.593 29.9729 22.7376 29.9729 22.9144V29.1019H6.02647V22.9144C6.02647 22.7376 5.88183 22.593 5.70504 22.593H3.29433C3.11754 22.593 2.9729 22.7376 2.9729 22.9144V30.8697C2.9729 31.5809 3.54745 32.1555 4.25861 32.1555H31.7408C32.4519 32.1555 33.0265 31.5809 33.0265 30.8697V22.9144C33.0265 22.7376 32.8818 22.593 32.705 22.593Z" />
+      </svg>
+    );
+  }
+);
+
+UploadOutlinedIcon.displayName = "UploadOutlinedIcon";
+
+export default UploadOutlinedIcon;

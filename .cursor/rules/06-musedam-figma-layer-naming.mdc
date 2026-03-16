@@ -1,0 +1,31 @@
+---
+description: When Figma link is provided, extract layer/frame/component names as component naming basis. Higher priority than general reskin.
+globs: **/*.{tsx,jsx,md,html}
+---
+
+# MuseDAM Figma Layer/Component Naming Rules
+
+## Trigger Conditions
+- Figma link provided (https://www.figma.com/file/... or https://figma.com/design/...)
+- Mention of “Figma file”, “design in Figma”, “restore from Figma”
+
+## Forced Execution Flow
+1. Extract File Key from link.
+2. Naming priority:
+   - Component/Instance → use ComponentNode.name (with variant: Button/Primary/Medium)
+   - Frame/Section → use as page/block name (e.g. IPLibraryPage, HeaderSection)
+   - Group/Auto Layout → semantic name or parent+child combination
+   - Atomic layers → only for internal className/data-testid
+3. Naming convention:
+   - PascalCase: AssetCard, ConfirmDialog
+   - Variants with / : Button/Primary/Large
+   - Path: src/components/ui/ or domain folder
+4. In code:
+   - File/export name = extracted semantic name
+   - Add data-component="original Figma name"
+   - If layers are generic (Frame 1, Group 45), warn user to rename in Figma.
+
+## Mapping Example (from your project)
+- approval-center/ → ApprovalCenterPage
+- AssetThumbnail.tsx → AssetThumbnail
+- icons/ → SearchIcon, SettingsIcon, etc.

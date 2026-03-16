@@ -1,0 +1,29 @@
+import { cn } from "@/lib/utils";
+import React from "react";
+
+export interface AiOutlinedIconProps extends React.SVGProps<SVGSVGElement> {
+  size?: number | string;
+}
+
+export const AiOutlinedIcon = React.forwardRef<SVGSVGElement, AiOutlinedIconProps>(
+  ({ className, size = 16, ...props }, ref) => {
+    return (
+      <svg
+        ref={ref}
+        viewBox="0 0 68 68"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        width={typeof size === "number" ? size : undefined}
+        height={typeof size === "number" ? size : undefined}
+        className={cn("inline-block shrink-0", typeof size === "string" && size, className)}
+        {...props}
+      >
+        <path fill="currentColor" d="M33.83 42.306h-8.342l-1.79 6.552H18l8.464-26.246h6.633l8.424 26.246h-5.9l-1.791-6.552zm-1.14-4.26l-.732-2.693a387.149 387.149 0 01-1.465-5.546l-.773-2.974h-.163c-.814 3.456-1.533 6.296-2.157 8.52l-.732 2.693h6.023zM44.1 28.963h5.534v19.895h-5.535V28.963zm2.767-3.095c-.923 0-1.682-.268-2.28-.804-.569-.563-.854-1.273-.854-2.13s.285-1.554.855-2.09c.597-.563 1.356-.844 2.279-.844.922 0 1.668.281 2.238.844.597.536.895 1.233.895 2.09 0 .857-.298 1.567-.895 2.13-.57.536-1.316.804-2.238.804z"/>
+      </svg>
+    );
+  }
+);
+
+AiOutlinedIcon.displayName = "AiOutlinedIcon";
+
+export default AiOutlinedIcon;

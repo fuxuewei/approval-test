@@ -1,0 +1,31 @@
+import { cn } from "@/lib/utils";
+import React from "react";
+
+export interface TextIconProps extends React.SVGProps<SVGSVGElement> {
+  size?: number | string;
+}
+
+export const TextIcon = React.forwardRef<SVGSVGElement, TextIconProps>(
+  ({ className, size = 16, ...props }, ref) => {
+    return (
+      <svg
+        ref={ref}
+        viewBox="0 0 36 36"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        width={typeof size === "number" ? size : undefined}
+        height={typeof size === "number" ? size : undefined}
+        className={cn("inline-block shrink-0", typeof size === "string" && size, className)}
+        {...props}
+      >
+        <path d="M32.5948 5C33.371 5 34 5.64101 34 6.43201C34 7.22301 33.371 7.86402 32.5948 7.86402H3.40521C2.62902 7.86402 2 7.22301 2 6.43201C2 5.64101 2.62902 5 3.40521 5H32.5948Z" fill="currentColor"/>
+<path d="M22.8649 16.568C23.6411 16.568 24.2701 17.209 24.2701 18C24.2701 18.791 23.6411 19.432 22.8649 19.432H3.40521C2.62902 19.432 2 18.791 2 18C2 17.209 2.62902 16.568 3.40521 16.568H22.8649Z" fill="currentColor"/>
+<path d="M26.1082 28.136C26.8844 28.136 27.5134 28.777 27.5134 29.568C27.5134 30.359 26.8844 31 26.1082 31H3.40521C2.62902 31 2 30.359 2 29.568C2 28.777 2.62902 28.136 3.40521 28.136H26.1082Z" fill="currentColor"/>
+      </svg>
+    );
+  }
+);
+
+TextIcon.displayName = "TextIcon";
+
+export default TextIcon;

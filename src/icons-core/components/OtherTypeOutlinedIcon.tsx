@@ -1,0 +1,29 @@
+import { cn } from "@/lib/utils";
+import React from "react";
+
+export interface OtherTypeOutlinedIconProps extends React.SVGProps<SVGSVGElement> {
+  size?: number | string;
+}
+
+export const OtherTypeOutlinedIcon = React.forwardRef<SVGSVGElement, OtherTypeOutlinedIconProps>(
+  ({ className, size = 16, ...props }, ref) => {
+    return (
+      <svg
+        ref={ref}
+        viewBox="0 0 69 68"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        width={typeof size === "number" ? size : undefined}
+        height={typeof size === "number" ? size : undefined}
+        className={cn("inline-block shrink-0", typeof size === "string" && size, className)}
+        {...props}
+      >
+        <path fill="currentColor" d="M23.84 29.252v.816h2.028v5.496h-2.244v.804h10.764v-.804h-2.256v-5.496h2.028v-.816h-2.028v-1.104h-.876v1.104h-4.512v-1.104h-.876v1.104H23.84zm2.904 6.312v-1.368h4.512v1.368h-4.512zm0-2.112V32.12h4.512v1.332h-4.512zm0-2.076v-1.308h4.512v1.308h-4.512zm.624 5.28c-.96.684-2.148 1.284-3.564 1.812l.54.696c1.44-.564 2.652-1.212 3.636-1.956l-.612-.552zm3.168.036l-.432.648a17.396 17.396 0 013.624 1.824l.48-.732c-1.104-.684-2.328-1.26-3.672-1.74zm7.524-8.568a13.82 13.82 0 01-2.676 5.004l.276.9c.456-.504.888-1.044 1.272-1.596v6.792h.852V31.04c.42-.804.768-1.656 1.056-2.556l-.78-.36zm6.744 10.848c.564 0 .96-.132 1.176-.396.204-.264.348-1.032.42-2.292l-.816-.276c-.048 1.068-.132 1.692-.252 1.872-.144.168-.36.264-.672.264h-3.768c-.408 0-.6-.192-.6-.564v-5.004l1.788-.564v4.536h.864v-4.812l1.764-.552c-.012 1.716-.036 2.712-.084 2.976-.06.288-.216.432-.468.432-.192 0-.396-.012-.624-.024l.252.84h.192c.84 0 1.308-.276 1.428-.804.108-.54.168-2.076.168-4.608l-2.628.84v-2.652h-.864v2.928l-1.788.576V29.3h-.864v2.664l-1.14.372v.876l1.14-.36V37.7c0 .84.408 1.272 1.248 1.272h4.128z"/>
+      </svg>
+    );
+  }
+);
+
+OtherTypeOutlinedIcon.displayName = "OtherTypeOutlinedIcon";
+
+export default OtherTypeOutlinedIcon;

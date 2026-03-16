@@ -1,0 +1,23 @@
+---
+description: Automatic Figma component → local component mapping. Highest priority for reuse and shadcn alignment.
+globs: **/*.{tsx,jsx}
+---
+
+# MuseDAM Figma Component Mapper (Auto Mapping Skill)
+
+## Trigger Conditions
+- Figma link provided + any component/layer name mentioned
+- Reskin or new component generation
+
+## Mandatory Workflow (execute before any code generation)
+1. Extract Figma layer/component names (use 06 rules).
+2. Check against existing project:
+   - Exact match in src/components/ui/ (Button, Input, Card, Dialog, Table, etc.)
+   - Exact match in root business components (AssetThumbnail, ConfirmDialog, UserAvatar, UserSelect, etc.)
+   - Domain folders (approval-center/, dnd/, upload/, etc.)
+3. Mapping Rules (priority order):
+   - Figma "Button/Primary/Medium" → import { Button } from '@/components/ui/button'
+   - Figma "Asset Card" or "IP Card" → reuse AssetThumbnail or create in domain folder
+   - Figma "Table" → reuse or map to shadcn Table + our Table styles
+   - Unknown → create in correct domain folder + add data-component comment
+4. Output mapping table first:

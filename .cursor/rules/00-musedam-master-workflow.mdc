@@ -1,0 +1,20 @@
+---
+description: Highest priority entry point for ALL tasks. Enforces the complete MuseDAM workflow.
+globs: **/*
+---
+
+# MuseDAM Master Workflow (Highest Priority)
+
+## Trigger Conditions
+- Any request involving Figma link, v0 link, design reskin, new component, color change, or UI implementation.
+
+## Mandatory Execution Order (AI must follow exactly)
+1. Read and enforce 05-musedam-globals-css.mdc (force-update if missing or outdated).
+2. Check existing components via 01-musedam-core.mdc directory structure (reuse first).
+3. Handle icons via 03-musedam-icons.mdc (Figma MCP → lucide-react).
+4. Apply naming via 06-musedam-figma-layer-naming.mdc or v0 component name.
+5. Execute reskin via 02-musedam-figma-make-reskin.mdc (Figma or v0 branch).
+6. Validate with 04-musedam-tailwind.mdc (only CSS variables, gap only, no margin, correct radius).
+7. Final check: 100% token usage, responsive, dark mode ready, data-component annotations.
+
+Before any code output, explicitly state: “Following MuseDAM Master Workflow – globals.css enforced, components reused, icons synced.”

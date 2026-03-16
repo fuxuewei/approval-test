@@ -1,0 +1,29 @@
+import { cn } from "@/lib/utils";
+import React from "react";
+
+export interface SubtaskSolidIconProps extends React.SVGProps<SVGSVGElement> {
+  size?: number | string;
+}
+
+export const SubtaskSolidIcon = React.forwardRef<SVGSVGElement, SubtaskSolidIconProps>(
+  ({ className, size = 16, ...props }, ref) => {
+    return (
+      <svg
+        ref={ref}
+        viewBox="0 0 36 36"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        width={typeof size === "number" ? size : undefined}
+        height={typeof size === "number" ? size : undefined}
+        className={cn("inline-block shrink-0", typeof size === "string" && size, className)}
+        {...props}
+      >
+        <path d="M20.4289 20.4301C20.4289 21.6435 21.6423 22.8591 22.8577 22.8591H32.5711C33.7866 22.8591 35 21.6435 35 20.4301V18.0011C35 16.7876 33.7866 15.572 32.5711 15.572H22.8577C21.6423 15.572 20.4289 16.7876 20.4289 18.0011H10.7113V10.714H15.569C17.0289 10.714 18 9.7428 18 8.28921V3.42903C18 1.97119 17.0289 1 15.5711 1H3.42887C1.97113 1 1 1.97119 1 3.42903V8.28708C1 9.7428 1.97113 10.7119 3.42887 10.7119H8.28662V30.1419C8.28662 31.5998 9.25775 32.571 10.7134 32.571H20.4289C20.4289 33.7865 21.6423 35 22.8577 35H32.5711C33.7887 35.0021 35 33.7887 35 32.5731V30.1441C35 28.9306 33.7866 27.715 32.5711 27.715H22.8577C21.6423 27.715 20.4289 28.9306 20.4289 30.1441H10.7113V20.4301H20.4268H20.4289ZM22.8577 18.0011H32.5711V20.4301H22.8577V18.0011ZM22.8577 30.1441H32.5711V32.5731H22.8577V30.1441Z" />
+      </svg>
+    );
+  }
+);
+
+SubtaskSolidIcon.displayName = "SubtaskSolidIcon";
+
+export default SubtaskSolidIcon;

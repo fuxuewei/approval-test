@@ -1,0 +1,15 @@
+---
+description: Global project development context
+globs: **/*
+---
+
+# MuseDAM Next.js Project Context
+
+- Tech stack: Next.js (App Router), Tailwind CSS v4, TypeScript, shadcn/ui, @radix-ui
+- Design source: Figma file NQ3UwPscfsmbcDpUqafpsW (Foundations canvas for icons)
+- Principles:
+  - Real business project – strict reuse of existing components.
+  - 100% follow 01-musedam-core.mdc tokens.
+  - All layouts responsive.
+  - lucide-react installed as icon fallback.
+  - globals.css always enforced.

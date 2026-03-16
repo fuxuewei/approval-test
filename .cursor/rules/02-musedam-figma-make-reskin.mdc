@@ -1,0 +1,35 @@
+---
+description: Triggered for Figma/v0 links or design descriptions. Forces “Reskin first, React second” workflow.
+globs: **/*.{tsx,jsx}
+---
+
+# MuseDAM Reskin Workflow
+
+## 1. Trigger Conditions
+- Figma link, v0 link, or design request.
+- “match our design system”, “apply MuseDAM styles”, or paste of HTML/JSX.
+
+## 2. Standard Workflow
+
+### 2.1 Figma Link Branch
+1. Figma Make Phase: convert description/link into single MuseDAM-styled HTML with inline styles + data-component attributes (follow designer guidelines exactly).
+2. React Translation: convert HTML to TSX line-by-line.
+   - Replace buttons/inputs with `src/components/ui/` components.
+   - Icons via 03-musedam-icons.mdc.
+   - Colors 100% from globals.css variables.
+   - Keep data-component comments.
+
+### 2.2 v0 Link Branch (Special)
+1. Take v0 generated TSX directly.
+2. Strip all original Tailwind colors and classes.
+3. Replace:
+   - UI primitives → `src/components/ui/` components
+   - Colors → `bg-background`, `text-foreground`, `bg-[var(--ant-primary-5)]`, etc.
+   - Spacing → gap-* only
+   - Icons → 03-musedam-icons.mdc
+4. Preserve logic (state, onClick, forms).
+5. Add `data-component="v0-original"` comment.
+
+## 3. Quality Control
+- 100% alignment with 01-musedam-core.mdc and designer guidelines.
+- Only gap for layout, no margin, responsive, dark mode ready.

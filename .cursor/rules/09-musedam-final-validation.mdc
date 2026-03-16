@@ -1,0 +1,23 @@
+---
+description: Post-generation quality gate. Runs automatic checklist before final code output.
+globs: **/*.{tsx,jsx}
+---
+
+# MuseDAM Final Validation & Quality Gate (Last Step)
+
+## Trigger
+- Always run as the VERY LAST step before outputting any TSX code (after 00-08).
+
+## Mandatory Checklist (AI must verify and report)
+1. Colors: 100% from globals.css variables? (no hard hex, no old Ant, no gray-xxx)
+2. Spacing: only gap-*/p-* ? (no margin between siblings)
+3. Radius: Button/Input=6px, Card=8px, Modal=12px?
+4. Icons: from src/components/icons/ (Figma or lucide-react) + currentColor?
+5. Components: reused existing or correctly placed in domain folder? (07 mapper used)
+6. Typography: exact designer scale (22/32 H5, 14/22 body, etc.)?
+7. Dark mode: .dark class compatible + ThemeProvider used?
+8. Annotations: data-component="..." present for every major element?
+9. Responsive: w-full + max-w-7xl + no fixed 1440px?
+10. shadcn: all primitives from ui/ and styled with MuseDAM?
+
+## Output Format (before code block)

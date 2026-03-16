@@ -1,0 +1,36 @@
+import { cn } from "@/lib/utils";
+import React from "react";
+
+export interface CameraIconProps extends React.SVGProps<SVGSVGElement> {
+  size?: number | string;
+}
+
+export const CameraIcon = React.forwardRef<SVGSVGElement, CameraIconProps>(
+  ({ className, size = 16, ...props }, ref) => {
+    return (
+      <svg
+        ref={ref}
+        viewBox="0 0 36 36"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        width={typeof size === "number" ? size : undefined}
+        height={typeof size === "number" ? size : undefined}
+        className={cn("inline-block shrink-0", typeof size === "string" && size, className)}
+        {...props}
+      >
+        <g clip-path="url(#clip0_2_52374)">
+<path d="M32.1427 7.40018H26.6784L25.3766 3.75196C25.2867 3.50233 25.1219 3.28654 24.9047 3.13409C24.6875 2.98163 24.4286 2.89994 24.1632 2.90018H11.8365C11.294 2.90018 10.8079 3.2417 10.6271 3.75196L9.32127 7.40018H3.85699C2.08109 7.40018 0.6427 8.83857 0.6427 10.6145V28.9359C0.6427 30.7118 2.08109 32.1502 3.85699 32.1502H32.1427C33.9186 32.1502 35.357 30.7118 35.357 28.9359V10.6145C35.357 8.83857 33.9186 7.40018 32.1427 7.40018ZM32.4641 28.9359C32.4641 29.1127 32.3195 29.2573 32.1427 29.2573H3.85699C3.6802 29.2573 3.53556 29.1127 3.53556 28.9359V10.6145C3.53556 10.4377 3.6802 10.293 3.85699 10.293H11.3583L12.0454 8.3725L12.9655 5.79304H23.0302L23.9503 8.3725L24.6373 10.293H32.1427C32.3195 10.293 32.4641 10.4377 32.4641 10.6145V28.9359ZM17.9998 12.8645C14.4481 12.8645 11.5713 15.7413 11.5713 19.293C11.5713 22.8448 14.4481 25.7216 17.9998 25.7216C21.5516 25.7216 24.4284 22.8448 24.4284 19.293C24.4284 15.7413 21.5516 12.8645 17.9998 12.8645ZM17.9998 23.1502C15.8704 23.1502 14.1427 21.4225 14.1427 19.293C14.1427 17.1636 15.8704 15.4359 17.9998 15.4359C20.1293 15.4359 21.857 17.1636 21.857 19.293C21.857 21.4225 20.1293 23.1502 17.9998 23.1502Z" />
+</g>
+<defs>
+<clipPath id="clip0_2_52374">
+<rect width="36" height="36" fill="currentColor"/>
+</clipPath>
+</defs>
+      </svg>
+    );
+  }
+);
+
+CameraIcon.displayName = "CameraIcon";
+
+export default CameraIcon;

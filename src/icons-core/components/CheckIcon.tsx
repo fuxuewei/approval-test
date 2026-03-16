@@ -1,0 +1,29 @@
+import { cn } from "@/lib/utils";
+import React from "react";
+
+export interface CheckIconProps extends React.SVGProps<SVGSVGElement> {
+  size?: number | string;
+}
+
+export const CheckIcon = React.forwardRef<SVGSVGElement, CheckIconProps>(
+  ({ className, size = 16, ...props }, ref) => {
+    return (
+      <svg
+        ref={ref}
+        viewBox="0 0 36 36"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        width={typeof size === "number" ? size : undefined}
+        height={typeof size === "number" ? size : undefined}
+        className={cn("inline-block shrink-0", typeof size === "string" && size, className)}
+        {...props}
+      >
+        <path d="M34.0733 5.0625H31.2648C30.871 5.0625 30.4974 5.2433 30.2563 5.55268L13.6907 26.5379L5.74739 16.4732C5.62722 16.3207 5.47406 16.1973 5.2994 16.1124C5.12474 16.0275 4.93311 15.9833 4.73891 15.983H1.93042C1.66123 15.983 1.51257 16.2924 1.6773 16.5013L12.6822 30.4433C13.1965 31.0942 14.1849 31.0942 14.7032 30.4433L34.3264 5.57679C34.4911 5.37188 34.3425 5.0625 34.0733 5.0625Z" />
+      </svg>
+    );
+  }
+);
+
+CheckIcon.displayName = "CheckIcon";
+
+export default CheckIcon;

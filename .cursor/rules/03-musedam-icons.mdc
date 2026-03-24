@@ -1,77 +1,70 @@
 ---
-description: MANDATORY for Icon handling. Enforces Figma → icons-core → TSX 组件标准化流程.
-globs: **/*.{tsx,jsx}
+description: MANDATORY for Icon handling. Enforces SVG-only maintenance and direct usage.
+globs: **/*.{tsx,jsx,svg}
 ---
 
-# MuseDAM Icon Sync
+# MuseDAM Icon Standard (SVG-First)
 
-## 1. 目录结构（标准化）
+## 1. 唯一存储规范
 
-```
-src/icons-core/              # 图标核心（未来可拆包）
-├── assets/*.svg             # Figma 同步的源 SVG
-├── components/[Name]Icon.tsx # 自动生成的 TSX 组件
-├── types.ts                 # 共享类型
-└── index.ts                 # 统一导出（自动生成）
+| 职责 | 路径 | 说明 |
+|------|------|------|
+| SVG 文件 | `public/icons/[Name].svg` | 通过 HTTP `/icons/[Name].svg` 访问 |
+| Icon 组件 | `src/components/icons/index.tsx` | 导出 `<Icon>` 和 `IconProps` |
+| 导航图标映射 | `src/components/icons/NavIcons.tsx` | 导出 `<NavIcon>` 和 `NavIconName` |
 
-src/components/icons/        # 业务使用入口
-├── index.ts                 # 从 icons-core re-export
-├── NavIcons.tsx             # 特殊图标组件（保留）
-└── DefaultAvatar.tsx        # 其他特殊图标
-```
+**NEVER:**
+- NEVER store SVG files under `src/` (deprecated: `src/components/icons/*.svg`)
+- NEVER create individual `XxxIcon.tsx` wrapper files
+- NEVER use `SvgIcon`, `UnifiedIcon` (deleted)
+- NEVER import from `src/components/ui/icon.tsx` or `src/components/ui/icons.tsx` directly
 
-## 2. Asset Configuration
-- FILE_ID: NQ3UwPscfsmbcDpUqafpsW
-- TARGET_CANVAS: Foundations
-- Naming: match Icons/ prefix or exact name.
-- 输出目录: `src/icons-core/assets/`
+## 2. 标准使用方式
 
-## 3. Mandatory Workflow（Figma → TSX）
-
-### 3.1 同步 Figma 图标（设计更新时执行）
-```bash
-pnpm icons:pull
-```
-流程：
-1. 调用 Figma API 获取 Icons 画布组件
-2. 导出为 SVG → 保存到 `src/icons-core/assets/[Name].svg`
-3. 自动调用 `svg-to-tsx` 生成 TSX 组件
-
-### 3.2 仅生成 TSX（已有 SVG 时）
-```bash
-pnpm icons:build
-```
-流程：
-1. 读取 `src/icons-core/assets/*.svg`
-2. 生成 `src/icons-core/components/[Name]Icon.tsx`
-3. 更新 `src/icons-core/index.ts` 统一导出
-
-### 3.3 使用图标（业务代码）
 ```tsx
-// 统一入口
-import { CloseIcon, SearchIcon } from "@/components/icons";
+// ✅ 正确 — 所有业务组件统一使用这个
+import { Icon } from '@/components/icons';
+<Icon name="CaretDown" size={16} className="text-foreground" />
 
-<CloseIcon className="w-4 h-4" size={20} />
+// ✅ 导航图标（仅 IconRail 使用）
+import { NavIcon } from '@/components/icons/NavIcons';
+<NavIcon name="approvalCenter" size={16} />
+
+// ❌ 错误 — 不要使用旧路径
+import { SvgIcon } from '@/components/ui/icon';
+import { DashboardIcon } from '@/components/ui/icons';
 ```
+## 3. Figma → SVG 工作流
 
-## 4. SVG 标准化规范
-- 移除硬编码 fill/stroke
-- 使用 `fill="currentColor"` 或 `stroke="currentColor"`
-- viewBox 保持原始值（通常是 "0 0 36 36"）
-- 组件接受 `size?: number | string` 和 `className` 属性
+### 3.1 【强制】图标名称锚定规则
+- Figma MCP 返回的代码中，图标节点会带有 `data-name="XxxName"` 属性
+- **MUST use the exact `data-name` value as filename and `<Icon name>`. NEVER infer, rename, or substitute.**
+- ✅ `data-name="SquarePen"` → `SquarePen.svg` → `<Icon name="SquarePen" />`
+- ❌ `data-name="User2"` → MUST NOT be written as `UserOutlined` / `User` / `UserIcon`
 
-## 5. Fallback Mechanism
-- **Priority 1**: Figma → icons-core 组件（业务图标）
-  - 使用 `pnpm icons:pull` 同步
-  - 通过 `@/components/icons` 导入
-- **Priority 2**: lucide-react（通用 UI 图标）
-  - 直接使用 `import { Search, Settings } from "lucide-react"`
-  - 无需同步，即拿即用
-- **Priority 3**: 临时/调试图标
-  - 使用 `SvgIcon` 从 `public/icons/` 动态加载
-  - 仅用于开发期，稳定后应移入 icons-core
+### 3.2 提取步骤
+1. **Extract**: 使用官方 `figma` MCP 的 `get_design_context` 工具获取原始 SVG 内容
+2. **Cleanup**: 必须处理 SVG：
+   - 移除硬编码颜色 → 统一替换为 `fill="currentColor"` 或 `stroke="currentColor"`
+   - 移除固定 `width`/`height` 属性（由 `<Icon size={n}>` 控制）
+   - 保留 `viewBox`
+3. **Save**: 直接保存到 `public/icons/[Name].svg`
+4. **Use**: `<Icon name="[Name]" size={16} className="text-foreground" />`
 
-## 6. 禁止事项
-- Never guess SVG paths
-- Never use emojis for functional icons
-- 不要在业务代码中直接引用 `src/icons-core/`，统一使用 `@/components/icons`
+## 4. 图标查找优先级
+
+1. **检查 `public/icons/`** — 确认同名 SVG 是否已存在
+2. **从 Figma 提取** — 按上述工作流操作
+3. **lucide-react fallback** — 仅当 `public/icons/` 中确实不存在时才使用
+
+## 5. SVG 文件规范
+
+```svg
+<!-- ✅ 正确示例 -->
+<svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+  <path fill="currentColor" d="..."/>
+</svg>
+
+<!-- ❌ 错误：硬编码颜色和尺寸 -->
+<svg width="16" height="16" fill="#1A1A1A" ...>
+```

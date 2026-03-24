@@ -833,7 +833,7 @@ export function LiveTranslation() {
                   restoreOriginalTexts();
                   setSelectedLocale(null);
                 }}
-                className="text-muted-foreground"
+                className="text-basic-5"
               >
                 Restore Original
               </DropdownMenuItem>

@@ -6,9 +6,19 @@ const nextConfig: NextConfig = {
   devIndicators: false,
   images: {
     remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'musedam-assets.oss-cn-beijing.aliyuncs.com',
+      },
+      {
+        protocol: 'http',
+        hostname: 'musedam-assets.oss-cn-beijing.aliyuncs.com',
+      },
       { protocol: 'https', hostname: '*musetransfer*' },
       { protocol: 'https', hostname: '*tezign*' },
       { protocol: 'https', hostname: '*musedam*' },
+      { protocol: 'https', hostname: '*feishucdn*' },
+      { protocol: 'https', hostname: '*thirdwx.qlogo.cn*' },
     ],
   },
   experimental: {

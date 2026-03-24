@@ -19,9 +19,8 @@ export default function ApprovalLayout({
   return (
     <SidebarProvider className="h-dvh">
       <AppSidebar />
-      <SidebarInset className="bg-background">
-        <LayoutHeader />
-        <main className="flex-1 px-6 pb-6 overflow-auto">
+      <SidebarInset className="h-full relative overflow-hidden flex flex-col">
+        <main className="pt-[22px] pb-5 px-5 flex flex-1 flex-col gap-4 bg-basic-1 min-h-0 overflow-hidden">
           {children}
         </main>
       </SidebarInset>

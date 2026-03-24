@@ -2,18 +2,18 @@
 
 import { useState } from "react";
 import {
-  IconLogo,
-  IconPanel,
-  IconChevronRight,
-  IconChevronDown,
-  IconSearch,
-  IconDownload,
-  IconPlus,
-  IconBox,
-  IconSort,
-  IconMore,
-  IconSuccess,
-} from "../components/icons";
+  LayoutGrid,
+  ChevronRight,
+  ChevronDown,
+  Search,
+  Download,
+  Plus,
+  Package,
+  ArrowUpDown,
+  MoreHorizontal,
+  Check,
+} from "lucide-react";
+import { Icon } from "@/components/icons";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   DropdownMenu,
@@ -52,19 +52,19 @@ export default function HomePage() {
       {/* Icon Sidebar - 56px */}
       <aside className="flex flex-col items-center gap-6 py-4 w-[56px] shrink-0 h-full bg-surface border-r border-border">
         <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary-600 text-white [&_svg]:w-5 [&_svg]:h-5">
-          <IconLogo />
+          <Icon name="logo" />
         </div>
         <nav className="flex flex-col gap-8">
           <button type="button" className="flex items-center justify-center w-10 h-10 rounded-lg text-text-primary hover:bg-primary-100 [&_svg]:w-5 [&_svg]:h-5">
-            <IconPanel />
+            <LayoutGrid />
           </button>
         </nav>
         <div className="flex flex-col gap-8 flex-1 justify-end">
           <button type="button" className="flex items-center justify-center w-10 h-10 rounded-lg text-text-primary [&_svg]:w-5 [&_svg]:h-5">
-            <IconPanel />
+            <LayoutGrid />
           </button>
           <button type="button" className="flex items-center justify-center w-10 h-10 rounded-lg text-text-primary [&_svg]:w-5 [&_svg]:h-5">
-            <IconPanel />
+            <LayoutGrid />
           </button>
           <div className="flex items-center justify-center w-8 h-8 rounded-2xl bg-primary-600 text-white text-12 font-semibold">
             M
@@ -83,21 +83,21 @@ export default function HomePage() {
               href="#"
               className="flex items-center gap-3 px-4 py-2 rounded-button text-14 text-text-primary hover:bg-primary-100"
             >
-              <IconPanel />
+              <LayoutGrid />
               <span>控制面板</span>
             </a>
             <a
               href="#"
               className="flex items-center gap-3 px-4 py-2 rounded-button text-14 text-text-primary hover:bg-primary-100"
             >
-              <IconPanel />
+              <LayoutGrid />
               <span>AI 打标审核</span>
             </a>
             <a
               href="#"
               className="flex items-center gap-3 px-4 py-2 rounded-button text-14 text-text-primary hover:bg-primary-100"
             >
-              <IconPanel />
+              <LayoutGrid />
               <span>AI 匹配测试</span>
             </a>
           </nav>
@@ -111,28 +111,28 @@ export default function HomePage() {
               href="#"
               className="flex items-center gap-3 px-4 py-2 rounded-button text-14 text-text-primary hover:bg-primary-100"
             >
-              <IconPanel />
+              <LayoutGrid />
               <span>人物特征库</span>
             </a>
             <a
               href="#"
               className="flex items-center gap-3 px-4 py-2 rounded-button text-14 font-medium text-primary-600 bg-primary-100"
             >
-              <IconPanel />
+              <LayoutGrid />
               <span>商品特征库</span>
             </a>
             <a
               href="#"
               className="flex items-center gap-3 px-4 py-2 rounded-button text-14 text-text-primary hover:bg-primary-100"
             >
-              <IconPanel />
+              <LayoutGrid />
               <span>品牌特征库</span>
             </a>
             <a
               href="#"
               className="flex items-center gap-3 px-4 py-2 rounded-button text-14 text-text-primary hover:bg-primary-100"
             >
-              <IconPanel />
+              <LayoutGrid />
               <span>场景特征库</span>
             </a>
           </nav>
@@ -146,14 +146,14 @@ export default function HomePage() {
               href="#"
               className="flex items-center gap-3 px-4 py-2 rounded-button text-14 text-text-primary hover:bg-primary-100"
             >
-              <IconPanel />
+              <LayoutGrid />
               <span>打标设置</span>
             </a>
             <a
               href="#"
               className="flex items-center gap-3 px-4 py-2 rounded-button text-14 text-text-primary hover:bg-primary-100"
             >
-              <IconPanel />
+              <LayoutGrid />
               <span>成员设置</span>
             </a>
           </nav>
@@ -177,7 +177,7 @@ export default function HomePage() {
           {/* Breadcrumb */}
           <div className="flex items-center gap-4">
             <span className="text-14 text-text-secondary">特征库管理</span>
-            <IconChevronRight className="w-3.5 h-3.5 text-text-secondary shrink-0" />
+            <ChevronRight className="w-3.5 h-3.5 text-text-secondary shrink-0" />
             <span className="text-14 font-medium text-text-primary">
               商品特征库
             </span>
@@ -187,7 +187,7 @@ export default function HomePage() {
           <div className="flex justify-between items-start gap-6">
             <div className="flex items-start gap-4">
               <div className="flex items-center justify-center w-11 h-11 rounded-card bg-warning-100 text-warning-600 shrink-0 [&_svg]:w-6 [&_svg]:h-6">
-                <IconBox />
+                <Package />
               </div>
               <div className="flex flex-col gap-2">
                 <h1 className="text-22 font-semibold text-text-primary leading-[var(--line-height-heading-tight)]">
@@ -205,7 +205,7 @@ export default function HomePage() {
                 size="sm"
                 className="h-9 px-6 border-border bg-surface text-14 font-medium text-text-primary hover:bg-primary-100 [&_svg]:w-4 [&_svg]:h-4"
               >
-                <IconDownload />
+                <Download />
                 导出
               </Button>
               <Button
@@ -214,7 +214,7 @@ export default function HomePage() {
                 size="sm"
                 className="h-9 px-6 bg-primary-600 text-white text-14 font-medium hover:bg-primary-600/90 [&_svg]:w-4 [&_svg]:h-4"
               >
-                <IconPlus />
+                <Plus />
                 添加商品特征
               </Button>
             </div>
@@ -230,16 +230,15 @@ export default function HomePage() {
             ].map((item) => (
               <div
                 key={item.label}
-                className="flex items-center gap-3 px-6 py-4 rounded-card bg-surface border border-border shrink-0"
+                className="flex items-center gap-3 px-6 py-4 rounded-card border border-border shrink-0"
               >
                 <div
-                  className={`flex items-center justify-center w-10 h-10 rounded-card shrink-0 [&_svg]:w-5 [&_svg]:h-5 ${
-                    item.icon === "success"
+                  className={`flex items-center justify-center w-10 h-10 rounded-card shrink-0 [&_svg]:w-5 [&_svg]:h-5 ${item.icon === "success"
                       ? "bg-success-100 text-success-600"
                       : "bg-primary-100 text-primary-600"
-                  }`}
+                    }`}
                 >
-                  <IconPanel />
+                  <LayoutGrid />
                 </div>
                 <div className="flex flex-col gap-2">
                   <span className="text-20 font-semibold text-text-primary leading-tight">
@@ -263,19 +262,17 @@ export default function HomePage() {
               <button
                 key={tab.label}
                 type="button"
-                className={`flex items-center gap-8 px-5 py-3 text-14 font-medium border-b-2 translate-y-px ${
-                  tab.active
+                className={`flex items-center gap-8 px-5 py-3 text-14 font-medium border-b-2 translate-y-px ${tab.active
                     ? "text-primary-600 border-primary-600"
                     : "text-text-secondary border-transparent hover:text-text-primary"
-                }`}
+                  }`}
               >
                 {tab.label}
                 <span
-                  className={`inline-flex items-center justify-center px-2 py-1 rounded-card text-12 ${
-                    tab.active
+                  className={`inline-flex items-center justify-center px-2 py-1 rounded-card text-12 ${tab.active
                       ? "bg-primary-100 text-primary-600"
                       : "bg-page text-text-secondary"
-                  }`}
+                    }`}
                 >
                   {tab.count}
                 </span>
@@ -287,18 +284,18 @@ export default function HomePage() {
           <div className="flex items-center justify-between gap-6">
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-8 px-4 py-2 rounded-button bg-surface border border-border w-64 [&_svg]:w-4 [&_svg]:h-4 [&_svg]:shrink-0 [&_svg]:text-text-secondary">
-                <IconSearch />
+                <Search />
                 <span className="text-14 text-text-secondary">
                   搜索商品名称…
                 </span>
               </div>
               <div className="flex items-center gap-8 px-4 py-2 rounded-button bg-surface border border-border text-14 text-text-primary [&_svg]:w-3.5 [&_svg]:h-3.5 [&_svg]:shrink-0">
                 <span>关联标签</span>
-                <IconChevronDown />
+                <ChevronDown />
               </div>
               <div className="flex items-center gap-8 px-4 py-2 rounded-button bg-surface border border-border text-14 text-text-primary [&_svg]:w-3.5 [&_svg]:h-3.5 [&_svg]:shrink-0">
                 <span>置信度</span>
-                <IconChevronDown />
+                <ChevronDown />
               </div>
             </div>
             <span className="text-14 text-text-secondary">共 86 项</span>
@@ -325,11 +322,11 @@ export default function HomePage() {
               </div>
               <div className="flex items-center gap-4 w-[130px] shrink-0 text-13 font-semibold text-text-primary [&_svg]:w-3 [&_svg]:h-3">
                 置信度
-                <IconSort />
+                <ArrowUpDown />
               </div>
               <div className="flex items-center gap-4 w-[110px] shrink-0 text-13 font-semibold text-text-primary [&_svg]:w-3 [&_svg]:h-3">
                 命中素材
-                <IconSort />
+                <ArrowUpDown />
               </div>
               <div className="flex-1 min-w-0 text-13 font-semibold text-text-primary">
                 关联标签
@@ -408,7 +405,7 @@ export default function HomePage() {
                 </div>
                 <div className="w-[120px] shrink-0">
                   <span className="inline-flex items-center gap-4 px-2 py-0.5 rounded-tag bg-success-100 text-success-600 text-13 [&_svg]:w-3 [&_svg]:h-3">
-                    <IconSuccess />
+                    <Check />
                     {row.status}
                   </span>
                 </div>
@@ -427,11 +424,10 @@ export default function HomePage() {
                     />
                   </div>
                   <span
-                    className={`text-14 font-medium shrink-0 ${
-                      parseFloat(row.confidence) >= 95
+                    className={`text-14 font-medium shrink-0 ${parseFloat(row.confidence) >= 95
                         ? "text-success-600"
                         : "text-warning-600"
-                    }`}
+                      }`}
                   >
                     {row.confidence}
                   </span>
@@ -443,11 +439,10 @@ export default function HomePage() {
                   {row.tags.map((tag, j) => (
                     <span
                       key={j}
-                      className={`inline-flex px-2 py-0.5 rounded-tag text-13 ${
-                        j === 0
+                      className={`inline-flex px-2 py-0.5 rounded-tag text-13 ${j === 0
                           ? "bg-primary-100 text-primary-600"
                           : "bg-warning-100 text-warning-600"
-                      }`}
+                        }`}
                     >
                       {tag}
                     </span>
@@ -463,7 +458,7 @@ export default function HomePage() {
                         aria-label="更多操作"
                         className="text-text-secondary hover:bg-primary-100 hover:text-text-primary [&_svg]:w-4 [&_svg]:h-4"
                       >
-                        <IconMore />
+                        <MoreHorizontal />
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent

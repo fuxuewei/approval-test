@@ -4,6 +4,7 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { TaskListPanel } from "@/components/approval-center/TaskListPanel";
 import { DetailPanel } from "@/components/approval-center/DetailPanel";
+import { LayoutHeader } from "../LayoutHeader";
 
 /**
  * Approval Center - Pending List Page
@@ -13,54 +14,28 @@ export default function ApprovalCenterPendingPage() {
   const [selectedTaskId, setSelectedTaskId] = useState<string>("1");
 
   return (
-    <div
-      data-component="ApprovalCenter/Page/Pending/ListView"
-      className={cn(
-        "flex flex-col",
-        "w-full h-full",
-        "gap-4"
-      )}
-    >
-      {/* Header */}
+    <>
+      <LayoutHeader />
       <div
-        data-component="ApprovalCenter/ContentArea/Header"
+        data-component="ApprovalCenter"
         className={cn(
-          "flex flex-col",
-          "px-5 py-5",
-          "bg-[var(--ant-basic-0)] rounded-lg"
-        )}
-      >
-        <div
-          data-component="ApprovalCenter/ContentArea/Header/Inner"
-          className="flex items-center gap-3"
-        >
-          <h1 className="text-[22px] leading-[32px] font-semibold text-[var(--ant-basic-8)]">
-            待办
-          </h1>
-          <span className="text-sm text-[var(--ant-basic-5)]">
-            共 5 个待办任务
-          </span>
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <div
-        data-component="ApprovalCenter/ContentArea/Main"
-        className={cn(
-          "flex flex-row flex-1",
-          "gap-2.5",
-          "min-h-0 overflow-hidden"
+          "flex flex-row items-stretch flex-1 min-h-0",
+          "w-full gap-2.5 overflow-hidden"
         )}
       >
         {/* Task List Panel */}
-        <TaskListPanel
-          selectedTaskId={selectedTaskId}
-          onTaskSelect={setSelectedTaskId}
-        />
+        <div className="w-[280px] min-w-[280px] min-h-0 overflow-hidden">
+          <TaskListPanel
+            selectedTaskId={selectedTaskId}
+            onTaskSelect={setSelectedTaskId}
+          />
+        </div>
 
         {/* Detail Panel */}
-        <DetailPanel taskId={selectedTaskId} />
+        <div className="flex-1 min-w-0 min-h-0 overflow-hidden">
+          <DetailPanel taskId={selectedTaskId} />
+        </div>
       </div>
-    </div>
+    </>
   );
 }

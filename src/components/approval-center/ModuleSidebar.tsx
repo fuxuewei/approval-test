@@ -62,7 +62,7 @@ export const ModuleSidebar = ({ title = "审批中心" }: ModuleSidebarProps) =>
         data-component="ApprovalCenter/ModuleSidebar/Header"
         className="flex items-center gap-2.5 px-3 pt-2"
       >
-        <h2 className="text-lg font-semibold text-[var(--ant-basic-8)]">
+        <h2 className="text-lg font-semibold text-basic-8">
           {title}
         </h2>
       </div>
@@ -79,12 +79,12 @@ export const ModuleSidebar = ({ title = "审批中心" }: ModuleSidebarProps) =>
               "flex items-center justify-between gap-2 px-3 py-2 rounded-[6px]",
               "text-sm transition-colors duration-200",
               item.active
-                ? "bg-[var(--ant-primary-1)] text-[var(--ant-primary-6)] font-medium"
-                : "text-[var(--ant-basic-6)] hover:bg-[var(--ant-basic-1)] hover:text-[var(--ant-basic-8)]"
+                ? "bg-primary-1 text-primary-6 font-medium"
+                : "text-basic-6 hover:bg-basic-1 hover:text-basic-8"
             )}
           >
             <div className="flex items-center gap-2">
-              <span className={item.active ? "text-[var(--ant-primary-6)]" : "text-[var(--ant-basic-5)]"}>
+              <span className={item.active ? "text-primary-6" : "text-basic-5"}>
                 {item.icon}
               </span>
               <span>{item.label}</span>
@@ -93,8 +93,8 @@ export const ModuleSidebar = ({ title = "审批中心" }: ModuleSidebarProps) =>
               <span className={cn(
                 "px-1.5 py-0.5 text-xs rounded-full",
                 item.active
-                  ? "bg-[var(--ant-primary-6)] text-white"
-                  : "bg-[var(--ant-basic-3)] text-[var(--ant-basic-5)]"
+                  ? "bg-primary-6 text-white"
+                  : "bg-basic-3 text-basic-5"
               )}>
                 {item.count}
               </span>

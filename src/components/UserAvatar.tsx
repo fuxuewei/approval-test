@@ -1,6 +1,6 @@
 import Image from "next/image"
 import { cn } from "@/lib/utils";
-import { DefaultAvatarIcon } from "./ui/icons";
+import { Icon } from "./icons";
 
 export const UserAvatar = ({ userInfo, size = 20, fontSize = 14 }: { userInfo?: { orgRealName?: string, orgNickName?: string, realName?: string, nickName?: string, avatarUrl?: string, phone?: string }, size?: number, fontSize?: number }) => {
     // 头像小于30px,不显示带字母的
@@ -28,7 +28,8 @@ export const UserAvatar = ({ userInfo, size = 20, fontSize = 14 }: { userInfo?: 
                 height: size + 'px',
             }}
             alt={nameInAvatar || ''}
-        /> : <DefaultAvatarIcon
+        /> : <Icon
+            name="DefaultAvatar"
             className='shrink-0'
             style={{
                 width: size + 'px',

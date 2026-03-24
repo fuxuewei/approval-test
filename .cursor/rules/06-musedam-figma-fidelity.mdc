@@ -1,0 +1,27 @@
+---
+description: High-fidelity Figma restoration rules for layout, typography, effects, and token mapping.
+globs: **/*.{tsx,jsx,css}
+---
+
+# MuseDAM Figma Fidelity Restoration
+
+## Trigger Conditions
+
+- Figma link, node-id, design recreation, design reskin, or "pixel-perfect" request.
+
+## Mandatory Fidelity Rules
+
+- Preserve Figma Auto Layout semantics: direction, alignment, gap, padding, wrap, and constraints. `Hug` maps to intrinsic content sizing, `Fill` maps to `flex-1` or `w-full`, and absolute positioning is allowed only when the Figma node is explicitly absolute/overlay.
+- Extract and map the typography quartet for every major text style: `font-size`, `line-height`, `font-weight`, `letter-spacing`. Do not pick the nearest class by feel. If any value cannot map to the current token set, list it under `Unmapped tokens` before writing TSX.
+- Extract and map visual effects: border color/width, radius, opacity, background fills, and shadows. Use existing token or approved utility classes first. Cards stay border-first; dropdowns, popovers, and modals may use `--shadow-dropdown`.
+- Icon size must follow the Figma node geometry. Do not default every icon to `16`; set `<Icon size={n}>` from the design unless the project already has a reused component that defines the size.
+
+## Non-Standard Value Policy
+
+- Spacing must stay on the 4px grid. When Figma outputs a non-standard spacing, round to the nearest supported token and record the original value in `Unmapped tokens` if the visual difference is meaningful.
+- If a Figma color, typography value, radius, or effect has no safe token mapping, stop short of approximation: report the gap first, then continue only after the gap is mapped or explicitly accepted.
+
+## Output Contract
+
+- Before code, print `Token mapping summary` with colors, typography, spacing, and effects used.
+- If there are gaps, print `Unmapped tokens` with the original Figma value, intended usage, and the proposed project token or follow-up action.

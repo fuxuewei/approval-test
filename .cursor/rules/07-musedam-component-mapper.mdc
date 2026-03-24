@@ -1,23 +1,65 @@
 ---
-description: Automatic Figma component → local component mapping. Highest priority for reuse and shadcn alignment.
-globs: **/*.{tsx,jsx}
+description: Automatic Figma component → local component mapping, naming, and shadcn alignment. Execute before any code generation.
+globs: **/*.{tsx,jsx,md,html}
 ---
 
-# MuseDAM Figma Component Mapper (Auto Mapping Skill)
+# MuseDAM Figma Component Mapper & Naming
 
 ## Trigger Conditions
+
 - Figma link provided + any component/layer name mentioned
 - Reskin or new component generation
 
-## Mandatory Workflow (execute before any code generation)
-1. Extract Figma layer/component names (use 06 rules).
-2. Check against existing project:
-   - Exact match in src/components/ui/ (Button, Input, Card, Dialog, Table, etc.)
-   - Exact match in root business components (AssetThumbnail, ConfirmDialog, UserAvatar, UserSelect, etc.)
-   - Domain folders (approval-center/, dnd/, upload/, etc.)
-3. Mapping Rules (priority order):
-   - Figma "Button/Primary/Medium" → import { Button } from '@/components/ui/button'
-   - Figma "Asset Card" or "IP Card" → reuse AssetThumbnail or create in domain folder
-   - Figma "Table" → reuse or map to shadcn Table + our Table styles
-   - Unknown → create in correct domain folder + add data-component comment
-4. Output mapping table first:
+## Step 1 — Extract & Name (from Figma layers)
+
+Naming priority:
+
+- Component/Instance → use ComponentNode.name (with variant: Button/Primary/Medium)
+- Frame/Section → use as page/block name (e.g. IPLibraryPage, HeaderSection)
+- Group/Auto Layout → semantic name or parent+child combination
+- Atomic layers → only for internal className/data-testid
+
+Naming convention:
+
+- PascalCase: AssetCard, ConfirmDialog
+- Variants with `/`: Button/Primary/Large
+- If layers are generic (Frame 1, Group 45), warn user to rename in Figma
+
+In code:
+
+- File/export name = extracted semantic name
+- MUST add `data-component="original Figma name"` to every major element
+
+## Step 2 — Map to Local Components (priority order)
+
+Check against existing project before creating anything new:
+
+- Exact match in `src/components/ui/` (Button, Input, Card, Dialog, Table, etc.)
+- Exact match in root business components (AssetThumbnail, ConfirmDialog, UserAvatar, UserSelect, etc.)
+- Domain folders (approval-center/, dnd/, upload/, etc.)
+- If an existing component already covers most of the target block, extend it with props or variants instead of creating a sibling component.
+
+Mapping rules:
+
+| Figma Layer | Local Component |
+| --- | --- |
+| Button/Primary/Medium | `import { Button } from '@/components/ui/button'` |
+| Asset Card / IP Card | reuse `AssetThumbnail` or create in domain folder |
+| Table | reuse or map to shadcn Table + MuseDAM styles |
+| Icon node (SVG/vector) | `<Icon name="XXX" size={16} />` — check `public/icons/` first |
+| Tabs | `import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'` |
+| Badge/Tag | `import { Badge } from '@/components/ui/badge'` |
+| Avatar/UserAvatar | reuse `UserAvatar` from `@/components/UserAvatar` |
+| Unknown | create in correct domain folder + add data-component comment |
+
+If a shadcn component is referenced but `src/components/ui/[name].tsx` is missing, output the install command before writing code:
+
+```bash
+npx shadcn@latest add [component-name]
+```
+
+Before code output, include:
+
+- `Reuse manifest`
+- `New components`
+- `Why existing components were insufficient`

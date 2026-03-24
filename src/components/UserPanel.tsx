@@ -6,8 +6,9 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 import { LogOut, User } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+
 export default function UserPanel() {
-  const tProject = useTranslations("project");
+  const t = useTranslations();
   const {
     data: session
   } = useSession();
@@ -24,8 +25,8 @@ export default function UserPanel() {
   };
   if (!session?.user) {
     return <div className="flex items-center space-x-4">
-      <Button onClick={() => router.push("/auth/signin")} variant="default">{tProject("UserPanel.logIn")}</Button>
-      <Button onClick={() => router.push("/auth/signup")} variant="outline">{tProject("UserPanel.register")}</Button>
+      <Button onClick={() => router.push("/auth/signin")} variant="default">{t("UserPanel.logIn")}</Button>
+      <Button onClick={() => router.push("/auth/signup")} variant="outline">{t("UserPanel.register")}</Button>
     </div>;
   }
   return <div className="flex items-center space-x-4">
@@ -53,12 +54,12 @@ export default function UserPanel() {
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={handleProfileClick}>
           <User className="mr-2 h-4 w-4" />
-          <span>{tProject("UserPanel.profile")}</span>
+          <span>{t("UserPanel.profile")}</span>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={handleLogout}>
           <LogOut className="mr-2 h-4 w-4" />
-          <span>{tProject("UserPanel.logOut")}</span>
+          <span>{t("UserPanel.logOut")}</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

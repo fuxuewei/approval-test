@@ -24,7 +24,6 @@ globs: **/*.{tsx,jsx}
 2. Strip all original Tailwind colors and classes.
 3. Replace:
    - UI primitives → `src/components/ui/` components
-   - Colors → `bg-background`, `text-foreground`, `bg-[var(--ant-primary-5)]`, etc.
    - Spacing → gap-* only
    - Icons → 03-musedam-icons.mdc
 4. Preserve logic (state, onClick, forms).

@@ -1,11 +1,133 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+@custom-variant zh (&:is([lang="zh-CN"] *));
+
+/* ==================== Tailwind v4 Theme Configuration ==================== */
+@theme {
+  /* Colors - Core */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-popover: var(--popover);
+  --color-modal: var(--modal);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-ring: var(--ring);
+  --color-radius: var(--radius);
+
+  /* Colors - Primary scale */
+  --color-primary-1: var(--color-primary-1);
+  --color-primary-2: var(--color-primary-2);
+  --color-primary-5: var(--color-primary-5);
+  --color-primary-6: var(--color-primary-6);
+  --color-primary-7: var(--color-primary-7);
+  --color-primary-100: var(--color-primary-100);
+  --color-primary-600: var(--color-primary-600);
+
+  /* Colors - Semantic */
+  --color-success-1: var(--color-success-1);
+  --color-success-6: var(--color-success-6);
+  --color-success-7: var(--color-success-7);
+  --color-success-100: var(--color-success-100);
+  --color-success-600: var(--color-success-600);
+
+  --color-warning-1: var(--color-warning-1);
+  --color-warning-6: var(--color-warning-6);
+  --color-warning-7: var(--color-warning-7);
+  --color-warning-100: var(--color-warning-100);
+  --color-warning-600: var(--color-warning-600);
+
+  --color-danger-1: var(--color-danger-1);
+  --color-danger-6: var(--color-danger-6);
+  --color-danger-7: var(--color-danger-7);
+  --color-danger-100: var(--color-danger-100);
+  --color-danger-600: var(--color-danger-600);
+
+  --color-info-1: var(--color-info-1);
+  --color-info-6: var(--color-info-6);
+  --color-info-7: var(--color-info-7);
+  --color-info-100: var(--color-info-100);
+  --color-info-600: var(--color-info-600);
+
+  /* Colors - Page & Surface */
+  --color-page: var(--color-page-bg);
+  --color-surface: var(--color-surface);
+
+  /* Colors - Text */
+  --color-text-primary: var(--color-text-primary);
+  --color-text-secondary: var(--color-text-secondary);
+  --color-text-tertiary: var(--color-text-tertiary);
+
+  /* Colors - Basic scale */
+  --color-basic-0: var(--color-basic-0);
+  --color-basic-1: var(--color-basic-1);
+  --color-basic-2: var(--color-basic-2);
+  --color-basic-3: var(--color-basic-3);
+  --color-basic-4: var(--color-basic-4);
+  --color-basic-5: var(--color-basic-5);
+  --color-basic-6: var(--color-basic-6);
+  --color-basic-8: var(--color-basic-8);
+  --color-basic-9: var(--color-basic-9);
+  --color-basic-10: var(--color-basic-10);
+
+  /* Colors - Accent */
+  --color-sunset-orange-1: var(--color-sunset-orange-1);
+  --color-sunset-orange-3: var(--color-sunset-orange-3);
+
+  /* Colors - Sidebar */
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Font Family */
+  --font-family-sans: var(--font-family-sans);
+
+  /* Font Size */
+  --font-size-12: var(--font-size-12);
+  --font-size-13: var(--font-size-13);
+  --font-size-14: var(--font-size-14);
+  --font-size-16: var(--font-size-16);
+  --font-size-18: var(--font-size-18);
+  --font-size-20: var(--font-size-20);
+  --font-size-22: var(--font-size-22);
+  --font-size-26: var(--font-size-26);
+  --font-size-30: var(--font-size-30);
+  --font-size-32: var(--font-size-32);
+  --font-size-36: var(--font-size-36);
+
+  /* Border Radius */
+  --radius-button: var(--radius-button-input);
+  --radius-input: var(--radius-button-input);
+  --radius-card: var(--radius-card);
+  --radius-modal: var(--radius-modal);
+  --radius-tag: var(--radius-tag);
+  --radius-avatar: var(--radius-avatar);
+
+  /* Line Height */
+  --line-height-heading-tight: var(--line-height-heading-tight);
+  --line-height-heading: var(--line-height-heading);
+  --line-height-body: var(--line-height-body);
+}
 
 /* ==================== MuseDAM Design System 颜色（100% aligned with designer guidelines） ==================== */
 :root {
   /* Light Mode */
-  --background: #F7F9FC;                    /* basic light 100 */
+  --background: #FFFFFF;                   
   --card: #FFFFFF;                          /* basic light 000 */
   --popover: #FFFFFF;
   --modal: #FFFFFF;
@@ -19,62 +141,96 @@
   --primary: #3366FF;                       /* primary 600 */
   --primary-foreground: #FFFFFF;
 
-  /* Tailwind color aliases */
-  --color-page-bg: #F7F9FC;
-  --color-surface: #FFFFFF;
-  --color-border: #E4E9F2;
-  --color-text-primary: #192038;
-  --color-text-secondary: #8F9BB3;
+  /* Tailwind color aliases - Primary scale */
+  --color-primary-1: #F2F6FF;
+  --color-primary-2: #D9E4FF;
+  --color-primary-5: #598BFF;
+  --color-primary-6: #3366FF;
+  --color-primary-7: #274BDB;
+  /* Legacy aliases */
   --color-primary-100: #F2F6FF;
   --color-primary-600: #3366FF;
+
+  /* Semantic colors */
+  --color-success-1: #EDFFF3;
+  --color-success-6: #00E096;
+  --color-success-7: #00B283;
   --color-success-100: #EDFFF3;
   --color-success-600: #00E096;
+
+  --color-warning-1: #FFFDF2;
+  --color-warning-6: #FFAA00;
+  --color-warning-7: #DB8B00;
   --color-warning-100: #FFFDF2;
   --color-warning-600: #FFAA00;
+
+  --color-danger-1: #FFF2F2;
+  --color-danger-6: #FF3D71;
+  --color-danger-7: #DB2C66;
   --color-danger-100: #FFF2F2;
   --color-danger-600: #FF3D71;
+
+  --color-info-1: #F2F8FF;
+  --color-info-6: #0095FF;
+  --color-info-7: #006FD6;
   --color-info-100: #F2F8FF;
   --color-info-600: #0095FF;
 
-  /* Primary full scale */
-  --ant-primary-1: #F2F6FF;
-  --ant-primary-2: #D9E4FF;
-  --ant-primary-5: #598BFF;
-  --ant-primary-6: #3366FF;
-  --ant-primary-7: #274BDB;
+  /* Page & Surface */
+  --color-page-bg: #F7F9FC;
+  --color-surface: #FFFFFF;
 
-  /* Basic Light */
-  --ant-basic-0: #FFFFFF;
-  --ant-basic-1: #F7F9FC;
-  --ant-basic-2: #EDF1F7;
-  --ant-basic-3: #E4E9F2;
-  --ant-basic-4: #C5CEE0;
-  --ant-basic-5: #8F9BB3;
-  --ant-basic-6: #2E3A59;
-  --ant-basic-8: #192038;
-  --ant-basic-10: #101426;
+  /* Text & Border */
+  --color-text-primary: #192038;
+  --color-text-secondary: #8F9BB3;
+  --color-text-tertiary: #2E3A59;
+  --color-border: #E4E9F2;
+  --color-border-strong: #C5CEE0;
 
-  /* Semantic full */
-  --ant-success-1: #EDFFF3;
-  --ant-success-6: #00E096;
-  --ant-success-7: #00B283;
-  --ant-danger-1: #FFF2F2;
-  --ant-danger-6: #FF3D71;
-  --ant-danger-7: #DB2C66;
-  --ant-warning-1: #FFFDF2;
-  --ant-warning-6: #FFAA00;
-  --ant-warning-7: #DB8B00;
-  --ant-info-1: #F2F8FF;
-  --ant-info-6: #0095FF;
-  --ant-info-7: #006FD6;
+  /* Accent (Tag) */
+  --color-sunset-orange-1: #FFF7E6;
+  --color-sunset-orange-3: #FFD591;
 
-  /* Sunset Orange (Tag) */
-  --sunset-orange-1: #FFF7E6;
-  --sunset-orange-3: #FFD591;
+  /* Basic scale (for bg-basic-2 / text-basic-5 / border-basic-3) */
+  --color-basic-0: #FFFFFF;
+  --color-basic-1: #F7F9FC;
+  --color-basic-2: #EDF1F7;
+  --color-basic-3: #E4E9F2;
+  --color-basic-4: #C5CEE0;
+  --color-basic-5: #8F9BB3;
+  --color-basic-6: #2E3A59;
+  --color-basic-8: #192038;
+  --color-basic-10: #101426;
 
   /* Disabled */
   --disabled-bg: #EDF1F7;
   --disabled-text: #8F9BB3;
+
+  /* shadcn/ui 主题变量 */
+  --radius: 0.5rem;
+  --card-foreground: #192038;
+  --popover-foreground: #192038;
+  --secondary: #EDF1F7;
+  --secondary-foreground: #192038;
+  --muted: #F7F9FC;
+  --accent: #F2F6FF;
+  --accent-foreground: #3366FF;
+  --destructive: #FF3D71;
+  --ring: #3366FF;
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+
+  /* Sidebar 变量 */
+  --sidebar: #FFFFFF;
+  --sidebar-primary: #3366FF;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #F2F6FF;
+  --sidebar-accent-foreground: #3366FF;
+  --sidebar-border: #E4E9F2;
+  --sidebar-ring: #3366FF;
 }
 
 .dark {
@@ -93,61 +249,94 @@
   --primary: #3366FF;
   --primary-foreground: #FFFFFF;
 
-  /* Tailwind color aliases - Dark */
-  --color-page-bg: #1F1F1F;
-  --color-surface: #262626;
-  --color-border: #595959;
-  --color-text-primary: #FAFAFA;
-  --color-text-secondary: #BFBFBF;
+  /* Tailwind color aliases - Dark - Primary scale */
+  --color-primary-1: #F2F6FF;
+  --color-primary-2: #D9E4FF;
+  --color-primary-5: #598BFF;
+  --color-primary-6: #3366FF;
+  --color-primary-7: #274BDB;
   --color-primary-100: #F2F6FF;
   --color-primary-600: #3366FF;
+
+  /* Semantic colors - Dark */
+  --color-success-1: #EDFFF3;
+  --color-success-6: #00E096;
+  --color-success-7: #00B283;
   --color-success-100: #EDFFF3;
   --color-success-600: #00E096;
+
+  --color-warning-1: #FFFDF2;
+  --color-warning-6: #FFAA00;
+  --color-warning-7: #DB8B00;
   --color-warning-100: #FFFDF2;
   --color-warning-600: #FFAA00;
+
+  --color-danger-1: #FFF2F2;
+  --color-danger-6: #FF3D71;
+  --color-danger-7: #DB2C66;
   --color-danger-100: #FFF2F2;
   --color-danger-600: #FF3D71;
+
+  --color-info-1: #F2F8FF;
+  --color-info-6: #0095FF;
+  --color-info-7: #006FD6;
   --color-info-100: #F2F8FF;
   --color-info-600: #0095FF;
 
-  /* Primary same */
-  --ant-primary-1: #F2F6FF;
-  --ant-primary-2: #D9E4FF;
-  --ant-primary-5: #598BFF;
-  --ant-primary-6: #3366FF;
-  --ant-primary-7: #274BDB;
+  /* Page & Surface - Dark */
+  --color-page-bg: #1F1F1F;
+  --color-surface: #262626;
 
-  /* Basic Dark full */
-  --ant-basic-0: #141414;
-  --ant-basic-1: #1F1F1F;
-  --ant-basic-2: #262626;
-  --ant-basic-3: #434343;
-  --ant-basic-4: #595959;
-  --ant-basic-5: #8C8C8C;
-  --ant-basic-6: #BFBFBF;
-  --ant-basic-9: #FAFAFA;
+  /* Text & Border - Dark */
+  --color-text-primary: #FAFAFA;
+  --color-text-secondary: #BFBFBF;
+  --color-text-tertiary: #BFBFBF;
+  --color-border: #595959;
+  --color-border-strong: #595959;
 
-  /* Semantic same */
-  --ant-success-1: #EDFFF3;
-  --ant-success-6: #00E096;
-  --ant-success-7: #00B283;
-  --ant-danger-1: #FFF2F2;
-  --ant-danger-6: #FF3D71;
-  --ant-danger-7: #DB2C66;
-  --ant-warning-1: #FFFDF2;
-  --ant-warning-6: #FFAA00;
-  --ant-warning-7: #DB8B00;
-  --ant-info-1: #F2F8FF;
-  --ant-info-6: #0095FF;
-  --ant-info-7: #006FD6;
+  /* Accent (Tag) - Dark (keep readable) */
+  --color-sunset-orange-1: #3A2A14;
+  --color-sunset-orange-3: #5A3B1A;
 
-  /* Sunset Orange */
-  --sunset-orange-1: #FFF7E6;
-  --sunset-orange-3: #FFD591;
+  /* Basic scale - Dark */
+  --color-basic-0: #141414;
+  --color-basic-1: #1F1F1F;
+  --color-basic-2: #262626;
+  --color-basic-3: #434343;
+  --color-basic-4: #595959;
+  --color-basic-5: #8C8C8C;
+  --color-basic-6: #BFBFBF;
+  --color-basic-9: #FAFAFA;
 
   /* Disabled */
   --disabled-bg: #434343;
   --disabled-text: #8C8C8C;
+
+  /* shadcn/ui 主题变量 - Dark */
+  --radius: 0.5rem;
+  --card-foreground: #FAFAFA;
+  --popover-foreground: #FAFAFA;
+  --secondary: #262626;
+  --secondary-foreground: #FAFAFA;
+  --muted: #1F1F1F;
+  --accent: #262626;
+  --accent-foreground: #598BFF;
+  --destructive: #FF3D71;
+  --ring: #8C8C8C;
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+
+  /* Sidebar 变量 - Dark */
+  --sidebar: #262626;
+  --sidebar-primary: #598BFF;
+  --sidebar-primary-foreground: #FAFAFA;
+  --sidebar-accent: #1F1F1F;
+  --sidebar-accent-foreground: #598BFF;
+  --sidebar-border: rgba(255, 255, 255, 0.1);
+  --sidebar-ring: #8C8C8C;
 }
 
 /* Typography */
@@ -207,4 +396,16 @@ body {
   color: var(--foreground);
   font-family: var(--font-family-sans);
   line-height: var(--line-height-body);
+}
+
+/* Tailwind base layer - 支持 border-border 等类 */
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+  }
 }

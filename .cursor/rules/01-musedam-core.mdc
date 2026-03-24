@@ -6,18 +6,24 @@ globs: **/*.{tsx,jsx,scss,css}
 # MuseDAM React Core Specification
 
 ## 1. Directory Structure & Reuse (Aligned with actual project)
+
 - Atomic UI: `src/components/ui/` (Button, Input, Badge, Dialog, etc. – shadcn/radix)
 - Business components (reuse first): root-level files such as AssetThumbnail.tsx, ConfirmDialog.tsx, UserAvatar.tsx, UserSelect.tsx, AuthProvider.tsx, PageLoadingFallback.tsx, ThemeProvider.tsx
 - Domain/feature folders: approval-center/, dnd/, upload/, AssetTypeIcon/, SimpleTooltip/, etc.
 - Icons: `src/components/icons/` (Figma MCP first)
-- Workflow: Before creating any new component, mentally list existing files and reuse or place in correct domain folder. Never reinvent the wheel.
+- Workflow: Before creating any new component, check existing files and reuse or place in correct domain folder. Prefer extending variants/props over creating a parallel component. Never reinvent the wheel.
+- Page files should orchestrate data and layout only; move complex visual blocks into the correct domain folder.
+- If the same visual block or logic appears twice, extract a reusable component, hook, util, mapper, or constants module.
+- Avoid wrapper-only components with no design or domain value.
 
 ## 2. Layout & Auto Layout
+
 - No fixed width: ban 1440px. Use `w-full`, `max-w-7xl`, `container`.
 - Flexbox priority: strictly use `gap` for spacing between siblings. NO MARGIN.
 - Spacing scale: multiples of 4 only (4, 8, 12, 16, 20, 24, 32, 40, 48) → Tailwind gap-1 to gap-12.
 
 ## 3. Color Tokens (Absolute – 100% from designer guidelines)
+
 - Light: Text `#192038` (basic light 800), secondary `#8F9BB3` (basic light 500). NEVER `#C5CEE0` for text.
 - Background: Page `#F7F9FC`, Card `#FFFFFF`.
 - Border: `#E4E9F2`.
@@ -26,11 +32,13 @@ globs: **/*.{tsx,jsx,scss,css}
 - All colors must come from globals.css CSS variables.
 
 ## 4. Visual Standards
+
 - Radius: Button/Input 6px, Card 8px, Modal 12px, Tag 4px.
 - Shadow: Cards are border-only. Shadows reserved for Dropdowns, Popovers, Modals (use --shadow-dropdown).
 - Height: Form controls default to Medium (36px).
 - Typography: exactly as in designer guidelines (H5 22/32, H6 20/28, etc.).
 
 ## 5. Icons & Emojis
+
 - Functional icons: MUST use `src/components/icons/` (Figma first, lucide-react fallback).
 - Decorative emojis: only if Figma layer is TEXT type.

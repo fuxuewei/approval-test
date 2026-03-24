@@ -6,15 +6,62 @@ globs: **/*
 # MuseDAM Master Workflow (Highest Priority)
 
 ## Trigger Conditions
+
 - Any request involving Figma link, v0 link, design reskin, new component, color change, or UI implementation.
 
 ## Mandatory Execution Order (AI must follow exactly)
-1. Read and enforce 05-musedam-globals-css.mdc (force-update if missing or outdated).
-2. Check existing components via 01-musedam-core.mdc directory structure (reuse first).
-3. Handle icons via 03-musedam-icons.mdc (Figma MCP → lucide-react).
-4. Apply naming via 06-musedam-figma-layer-naming.mdc or v0 component name.
-5. Execute reskin via 02-musedam-figma-make-reskin.mdc (Figma or v0 branch).
-6. Validate with 04-musedam-tailwind.mdc (only CSS variables, gap only, no margin, correct radius).
-7. Final check: 100% token usage, responsive, dark mode ready, data-component annotations.
 
-Before any code output, explicitly state: “Following MuseDAM Master Workflow – globals.css enforced, components reused, icons synced.”
+1. Confirm the MCP path is healthy before implementation:
+   - `figma` for primary design context
+   - `Figma Desktop` for fallback design context, screenshot, variables, and icon export
+   - `playwright-mcp-server` for visual diff validation
+   - `shadcn` MCP only if primitive install assistance is needed
+2. Check if `src/app/globals.css` exists. If missing, refer to 05-musedam-globals-css.mdc to recreate it. Otherwise skip.
+3. Check existing components via 01-musedam-core.mdc directory structure (reuse first).
+4. **Figma MCP Call** — process ONE Frame at a time. If multiple Figma links are provided, handle them sequentially, never batch multiple node-ids in a single call.
+   - Primary path: call official `figma` MCP `get_design_context` with extracted `fileKey` + `nodeId`, set `clientFrameworks: "react,next.js"`, `clientLanguages: "typescript"`.
+   - Fallback path: if official `figma` is unavailable, incomplete, or errored, immediately switch to `Figma Desktop.get_design_context`.
+   - Support calls: use `Figma Desktop.get_metadata` only for structure overview, `Figma Desktop.get_variable_defs` when token mapping is unclear, and `Figma Desktop.get_screenshot` for visual validation baselines.
+   - After design context, execute 06-musedam-figma-fidelity.mdc: extract colors, typography quartet, spacing, radius, and effects. Flag any unmapped tokens before proceeding.
+5. **[BLOCKING] Icon Pre-Audit — MUST complete before writing any TSX**:
+   a. From the Figma MCP output above, extract ALL nodes with data-name that are icons (SVG/vector nodes)
+   b. For each: check if `public/icons/[data-name].svg` exists
+   c. For missing ones: use `Figma Desktop` / localhost:3845 export path → replace all fill/stroke with currentColor → remove width/height → save to `public/icons/`
+   d. Print confirmation table before proceeding:
+      `✅ SquarePen.svg exists` / `⬇️ Bell2.svg downloaded & cleaned`
+   e. DO NOT write any TSX until all icons are ✅
+6. Apply naming and component mapping via 07-musedam-component-mapper.mdc before creating any new file.
+   - Reuse before create: search `src/components/ui/`, shared components, and the relevant domain folder first
+   - Prefer extending existing components with variants/props over creating sibling components
+   - Page files orchestrate data/layout only; repeated visual blocks or repeated logic must be extracted
+   - If a required shadcn component is missing from `src/components/ui/`, output the install command `npx shadcn@latest add [name]` and wait — DO NOT hand-write primitive components.
+7. Implement **Default state first**. Only after explicit user confirmation, add Empty / Loading / Error states.
+   - Execute reskin via 02-musedam-figma-make-reskin.mdc.
+8. Validate with 04-musedam-tailwind.mdc (use simplified color classes like `text-primary-6`, `bg-success-1`; gap only, no margin, correct radius).
+9. If the task includes a local page/screen, capture a Figma reference screenshot and run browser validation with `playwright-mcp-server` before the final answer. If Playwright MCP is unavailable, state the gap explicitly.
+10. Final check via 09-musedam-final-validation.mdc: output ✅/❌ checklist, `Reuse manifest`, `Token mapping summary`, `Unmapped tokens`, and `Visual diff notes` before code block.
+
+Before any code output, explicitly state: "Following MuseDAM Master Workflow – globals.css enforced, components reused, icons synced, fidelity checked."
+
+## Default Task Contract
+
+- Each request handles exactly one Frame and implements Default state first
+- Complete Icon Pre-Audit before writing any TSX
+- Preserve Figma Auto Layout semantics; do not replace them with approximate layout
+- Reuse existing components first; do not duplicate similar JSX structures
+- If a token cannot be mapped safely, list it under `Unmapped tokens` before code
+- If the page is runnable, perform Figma screenshot vs local screenshot validation; if Playwright MCP is unavailable, say so explicitly
+
+## Common Mistakes (AI must never do)
+
+| 错误 | 正确做法 |
+| --- | --- |
+| 修改 `src/components/ui/*.tsx` | 在业务域目录下封装 wrapper，不动 ui/ |
+| `text-[#192038]` 硬编码 hex | 使用 globals.css 变量，如 `text-basic-light-8` |
+| `data-name="User2"` 写成 `UserOutlined` | 严格使用 Figma data-name 原始值，不得重命名 |
+| 简单 div 都封装成独立组件 | 只在有复用价值时封装，简单结构直接内联 |
+| 猜测 shadcn 组件是否存在 | 先检查 `src/components/ui/`，缺失则用 shadcn MCP 或 CLI 兜底 |
+| 一次实现所有状态（Default/Empty/Loading/Error） | 先做 Default，用户确认结构后再补其他状态 |
+| Figma MCP 失败后直接跳过设计上下文 | 先按官方 `figma` → `Figma Desktop` 的顺序降级 |
+| 所有图标都写成 `size={16}` | 以 Figma 节点几何尺寸或复用组件既有尺寸为准 |
+| MCP 失效时继续假设工具可用 | 明确说明降级路径或让用户先修复 MCP 状态 |

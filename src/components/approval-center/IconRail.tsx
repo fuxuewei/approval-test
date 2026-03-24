@@ -43,13 +43,13 @@ export const IconRail = ({ userInfo }: IconRailProps) => {
       className={cn(
         "flex flex-col items-center",
         "w-[54px] h-full py-4 gap-6",
-        "bg-[var(--ant-basic-0)]"
+        "bg-basic-0"
       )}
     >
       {/* Logo */}
       <div
         data-component="AppShell/IconRail/Logo"
-        className="flex items-center justify-center w-8 h-8 rounded-[9px] bg-[var(--ant-primary-6)]"
+        className="flex items-center justify-center w-8 h-8 rounded-[9px] bg-primary-6"
       >
         <span className="text-white text-xs font-bold">M</span>
       </div>
@@ -68,8 +68,8 @@ export const IconRail = ({ userInfo }: IconRailProps) => {
               "w-8 h-8 rounded-lg p-1",
               "transition-colors duration-200",
               item.active
-                ? "bg-[var(--ant-primary-1)] text-[var(--ant-primary-6)]"
-                : "text-[var(--ant-basic-5)] hover:text-[var(--ant-basic-8)] hover:bg-[var(--ant-basic-1)]"
+                ? "bg-primary-1 text-primary-6"
+                : "text-basic-5 hover:text-basic-8 hover:bg-basic-1"
             )}
             title={item.label}
           >
@@ -85,7 +85,7 @@ export const IconRail = ({ userInfo }: IconRailProps) => {
       >
         <Separator
           data-component="AppShell/IconRail/Divider"
-          className="w-4 bg-[var(--ant-basic-3)]"
+          className="w-4 bg-basic-3"
           orientation="horizontal"
         />
 

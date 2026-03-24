@@ -6,10 +6,30 @@ globs: **/*
 # MuseDAM Next.js Project Context
 
 - Tech stack: Next.js (App Router), Tailwind CSS v4, TypeScript, shadcn/ui, @radix-ui
-- Design source: Figma file NQ3UwPscfsmbcDpUqafpsW (Foundations canvas for icons)
-- Principles:
+- Design sources:
+  - **Main AI Handoff file**: fileKey `32vuugdlfxv91hfMUWGOc2` (MuseDAM-AI-Handoff — all UI components)
+  - **Icons Foundations**: fileKey `NQ3UwPscfsmbcDpUqafpsW` (icon canvas, node-id: 9-138622)
+- Icon architecture: SVG stored in `public/icons/`, loaded via `<Icon name="XXX" />` from `src/components/icons/index.tsx`
+- MCP priority:
+  - Primary design context: official `figma.get_design_context`
+  - Fallback design context: `Figma Desktop.get_design_context`
+  - Structure overview only: `Figma Desktop.get_metadata`
+  - Token clarification: `Figma Desktop.get_variable_defs`
+  - Reference screenshot: `Figma Desktop.get_screenshot`
+  - Browser validation: `playwright-mcp-server`
+  - Primitive install fallback: `npx shadcn@latest add [name]`
+- MCP health policy:
+  - If official `figma` MCP errors, continue with `Figma Desktop` instead of skipping design context.
+  - If `playwright-mcp-server` errors, report that visual diff validation could not be completed.
+  - If `shadcn` MCP errors, use CLI install output as the fallback path.
+  - Never expose MCP tokens or API keys in generated code, prompts, or logs.
+- Engineering Principles:
   - Real business project – strict reuse of existing components.
   - 100% follow 01-musedam-core.mdc tokens.
   - All layouts responsive.
-  - lucide-react installed as icon fallback.
+  - lucide-react installed as icon fallback (only when icon not in public/icons/).
   - globals.css always enforced.
+- Product Principles (guide component structure & interaction design):
+  - Context First: every module should surface contextual info proactively — act as a Context Source or Container.
+  - Object Model First: design around objects and their relationships, not around page-level feature stacking.
+  - Design System Compliance: all implementations must follow MuseDAM Design Tokens and existing product patterns.

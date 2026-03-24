@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Plus } from "./icons";
+import { Icon } from "@/components/icons";
 
 /**
  * ApprovalEmptyState
@@ -38,7 +38,7 @@ export function ApprovalEmptyState() {
         {/* Subtitle - 副标题 */}
         <p
           data-component="ApprovalCenter/EmptyState/ApprovalTemplate/Text/Subtitle"
-          className="text-[14px] leading-[22px] text-muted-foreground"
+          className="text-[14px] leading-[22px] text-basic-5"
         >
           立即创建审批模板，标准化资产审批流程~
         </p>
@@ -54,7 +54,7 @@ export function ApprovalEmptyState() {
           variant="outline"
           className="flex h-9 items-center gap-1.5 rounded-[6px] border-border bg-card px-3 text-[14px] leading-[22px] text-foreground shadow-sm hover:bg-background"
         >
-          <Plus className="h-3.5 w-3.5 text-foreground" />
+          <Icon name="Plus" size={14} className="text-foreground" />
           <span>新建模板</span>
         </Button>
       </div>
@@ -77,7 +77,7 @@ function EmptyStateIllustration() {
     >
       {/* 背景云 */}
       <g opacity="0.3">
-        <ellipse cx="85" cy="70" rx="60" ry="30" fill="var(--ant-basic-3)" />
+        <ellipse cx="85" cy="70" rx="60" ry="30" fill="var(--color-basic-3)" />
       </g>
 
       {/* 主文档图标 */}
@@ -89,40 +89,40 @@ function EmptyStateIllustration() {
           width="50"
           height="65"
           rx="4"
-          fill="var(--ant-basic-0)"
-          stroke="var(--ant-basic-3)"
+          fill="var(--color-basic-0)"
+          stroke="var(--color-basic-3)"
           strokeWidth="2"
         />
 
         {/* 文档折角 */}
         <path
           d="M50 5L50 20L60 20L50 5Z"
-          fill="var(--ant-basic-1)"
-          stroke="var(--ant-basic-3)"
+          fill="var(--color-basic-1)"
+          stroke="var(--color-basic-3)"
           strokeWidth="1"
         />
 
         {/* 文档内部线条 */}
-        <line x1="20" y1="30" x2="50" y2="30" stroke="var(--ant-basic-3)" strokeWidth="2" strokeLinecap="round" />
-        <line x1="20" y1="40" x2="50" y2="40" stroke="var(--ant-basic-3)" strokeWidth="2" strokeLinecap="round" />
-        <line x1="20" y1="50" x2="40" y2="50" stroke="var(--ant-basic-3)" strokeWidth="2" strokeLinecap="round" />
+        <line x1="20" y1="30" x2="50" y2="30" stroke="var(--color-basic-3)" strokeWidth="2" strokeLinecap="round" />
+        <line x1="20" y1="40" x2="50" y2="40" stroke="var(--color-basic-3)" strokeWidth="2" strokeLinecap="round" />
+        <line x1="20" y1="50" x2="40" y2="50" stroke="var(--color-basic-3)" strokeWidth="2" strokeLinecap="round" />
 
         {/* 印章图标 */}
-        <circle cx="45" cy="50" r="12" fill="var(--ant-primary-1)" stroke="var(--ant-primary-6)" strokeWidth="1.5" />
-        <text x="45" y="54" textAnchor="middle" fill="var(--ant-primary-6)" fontSize="8" fontWeight="bold">
+        <circle cx="45" cy="50" r="12" fill="var(--color-primary-1)" stroke="var(--color-primary-6)" strokeWidth="1.5" />
+        <text x="45" y="54" textAnchor="middle" fill="var(--color-primary-6)" fontSize="8" fontWeight="bold">
           审
         </text>
       </g>
 
       {/* 装饰性元素 - 小圆点 */}
-      <circle cx="30" cy="40" r="4" fill="var(--ant-primary-1)" />
-      <circle cx="140" cy="35" r="3" fill="var(--ant-primary-1)" />
-      <circle cx="145" cy="60" r="2" fill="var(--ant-basic-3)" />
+      <circle cx="30" cy="40" r="4" fill="var(--color-primary-1)" />
+      <circle cx="140" cy="35" r="3" fill="var(--color-primary-1)" />
+      <circle cx="145" cy="60" r="2" fill="var(--color-basic-3)" />
 
       {/* 搜索图标装饰 */}
       <g transform="translate(125, 75)" opacity="0.5">
-        <circle cx="8" cy="8" r="6" stroke="var(--ant-basic-4)" strokeWidth="1.5" />
-        <path d="M12 12L16 16" stroke="var(--ant-basic-4)" strokeWidth="1.5" strokeLinecap="round" />
+        <circle cx="8" cy="8" r="6" stroke="var(--color-basic-4)" strokeWidth="1.5" />
+        <path d="M12 12L16 16" stroke="var(--color-basic-4)" strokeWidth="1.5" strokeLinecap="round" />
       </g>
     </svg>
   );

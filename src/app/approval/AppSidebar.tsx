@@ -26,7 +26,7 @@ const mainMenuItems = [
   },
   {
     title: "已办",
-    url: "/approval/done",
+    url: "/approval/completed",
     icon: CheckSquare,
   },
   {
@@ -36,7 +36,7 @@ const mainMenuItems = [
   },
   {
     title: "已发起",
-    url: "/approval/created",
+    url: "/approval/initiated",
     icon: FileOutput,
   },
 ];
@@ -51,80 +51,35 @@ const manageMenuItems = [
 
 const allMenuItems = [...mainMenuItems, ...manageMenuItems];
 
+
 export function getActiveMenuTitle(pathname: string): string {
-  const activeItem = allMenuItems.find((item) => pathname === item.url);
-  return activeItem?.title || "审批中心";
+  const menuItems = allMenuItems
+  const activeItem = menuItems.find((item) => pathname === item.url);
+  return activeItem?.title || '审批中心'
 }
 
 export function AppSidebar({ className, ...props }: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname();
+  const menuItems = allMenuItems
 
   return (
-    <Sidebar
-      collapsible="none"
-      className={cn(
-        "bg-background border-r border-border",
-        "w-[200px] min-w-[200px]",
-        className
-      )}
-      {...props}
-    >
-      {/* Logo / Title */}
+    <Sidebar collapsible="icon" className={cn("bg-background", className)} {...props}>
       <SidebarHeader className="group-data-[state=collapsed]:px-0 mb-4 px-[18px] h-[48px] flex flex-row items-center justify-between group-data-[state=collapsed]:justify-center">
-        <div className="group-data-[state=collapsed]:hidden leading-[32px] text-[16px] font-semibold text-foreground">审批中心</div>
+        <div className="group-data-[state=collapsed]:hidden leading-[32px] text-base font-semibold">审批中心</div>
         <SidebarTrigger />
       </SidebarHeader>
-
-      {/* Menu */}
-      <SidebarContent className="px-2">
-        {/* 主要菜单 */}
-        <SidebarMenu className="gap-1">
-          {mainMenuItems.map((item) => (
+      <SidebarContent className="px-1.5">
+        <SidebarMenu>
+          {menuItems.map((item) => (
             <SidebarMenuItem key={item.url}>
               <SidebarMenuButton
-                className={cn(
-                  "h-10 px-3 rounded-[8px]",
-                  "text-[14px] leading-[22px] text-muted-foreground",
-                  "hover:bg-background hover:text-primary",
-                  pathname === item.url && [
-                    "bg-[var(--ant-primary-1)]",
-                    "text-primary",
-                    "font-medium",
-                  ]
-                )}
+                className="px-4 h-10"
                 asChild
                 isActive={pathname === item.url}
+                tooltip={item.title}
               >
                 <Link href={item.url}>
-                  <item.icon className="size-4 mr-2" />
-                  <span>{item.title}</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          ))}
-        </SidebarMenu>
-
-        {/* 管理分组 */}
-        <div className="mt-6 mb-2 px-3 text-[14px] leading-[22px] text-muted-foreground/60">管理</div>
-        <SidebarMenu className="gap-1">
-          {manageMenuItems.map((item) => (
-            <SidebarMenuItem key={item.url}>
-              <SidebarMenuButton
-                className={cn(
-                  "h-10 px-3 rounded-[8px]",
-                  "text-[14px] leading-[22px] text-muted-foreground",
-                  "hover:bg-background hover:text-primary",
-                  pathname === item.url && [
-                    "bg-[var(--ant-primary-1)]",
-                    "text-primary",
-                    "font-medium",
-                  ]
-                )}
-                asChild
-                isActive={pathname === item.url}
-              >
-                <Link href={item.url}>
-                  <item.icon className="size-4 mr-2" />
+                  <item.icon className="size-4" />
                   <span>{item.title}</span>
                 </Link>
               </SidebarMenuButton>

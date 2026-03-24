@@ -10,13 +10,12 @@ export function LayoutHeader() {
             className={cn(
                 "sticky top-0 z-10",
                 "flex items-center justify-between",
-                "px-6 py-4",
-                "bg-background"
+                "bg-basic-1"
             )}
         >
             {/* Search */}
             <div className="relative w-[280px]">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-basic-5" />
                 <Input
                     type="text"
                     placeholder="搜索名称"

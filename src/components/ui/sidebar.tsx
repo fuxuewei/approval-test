@@ -18,7 +18,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
-import { DoubleLeftIcon } from "./icons";
+import { Icon } from "../icons";
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state";
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
@@ -280,34 +280,15 @@ function SidebarRail({ className, ...props }: React.ComponentProps<"button">) {
     <div
       className={cn(
         "absolute top-[20px] z-[51]",
-        "size-6 bg-background rounded-full border border-[var(--ant-basic-3)] border-solid flex items-center justify-center ",
+        "size-6 bg-background rounded-full border border-basic-3 hover:text-basic-9 text-basic-5 border-solid flex items-center justify-center ",
         "color-basic-5 cursor-pointer opacity-0 group-hover:opacity-100 ",
-        " ease-in-out transition-all duration-300 hover:text-basic-9",
+        " ease-in-out transition-all duration-300",
         open ? "right-[-12px]" : "right-[-16px]",
       )}
       onClick={toggleSidebar}
     >
-      <DoubleLeftIcon className={cn("w-3 h-3", open ? "rotate-0" : "rotate-180")} />
+      <Icon name='DoubleLeft' size={12} className={cn(open ? "rotate-0" : "rotate-180")} />
     </div>
-
-    // <button
-    //   data-sidebar="rail"
-    //   data-slot="sidebar-rail"
-    //   aria-label="Toggle Sidebar"
-    //   tabIndex={-1}
-    //   onClick={toggleSidebar}
-    //   title="Toggle Sidebar"
-    //   className={cn(
-    //     "hover:after:bg-sidebar-border absolute inset-y-0 z-20 hidden w-4 -translate-x-1/2 transition-all ease-linear group-data-[side=left]:-right-4 group-data-[side=right]:left-0 after:absolute after:inset-y-0 after:left-1/2 after:w-[2px] sm:flex",
-    //     "in-data-[side=left]:cursor-w-resize in-data-[side=right]:cursor-e-resize",
-    //     "[[data-side=left][data-state=collapsed]_&]:cursor-e-resize [[data-side=right][data-state=collapsed]_&]:cursor-w-resize",
-    //     "hover:group-data-[collapsible=offcanvas]:bg-sidebar group-data-[collapsible=offcanvas]:translate-x-0 group-data-[collapsible=offcanvas]:after:left-full",
-    //     "[[data-side=left][data-collapsible=offcanvas]_&]:-right-2",
-    //     "[[data-side=right][data-collapsible=offcanvas]_&]:-left-2",
-    //     className,
-    //   )}
-    //   {...props}
-    // />
   );
 }
 

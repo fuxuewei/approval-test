@@ -1,7 +1,6 @@
 import { FC, useState } from "react";
 import { MusedamUser } from "@/types/musedam";
-import { dispatchMuseDAMClientAction, logToParentConsole } from "@/embed/message";
-import { Combobox } from "@/app/project/spaces/(list)/_components/combobox";
+import { dispatchMuseDAMClientAction } from "@/embed/message";
 import { useDebounceEffect } from "ahooks";
 import { cn } from "@/lib/utils";
 import { formatMemberName } from "@/utils/formatMemberName";
@@ -32,9 +31,6 @@ export const UserList: FC<{
                     (user, index, self) => index === self.findIndex((u) => u.userId === user.userId),
                 );
                 setUsers(uniqueUsers || []);
-                logToParentConsole({
-                    getOrgUsers: uniqueUsers
-                });
             }
         };
 
@@ -55,7 +51,7 @@ export const UserList: FC<{
                 <div
                     key={user.userId}
                     className={cn(
-                        "h-[54px] flex items-center justify-between space-x-2.5 p-2 hover:bg-[var(--ant-basic-1)] rounded-[6px] cursor-pointer",
+                        "h-[54px] flex items-center justify-between space-x-2.5 p-2 hover:bg-basic-1 rounded-[6px] cursor-pointer",
                     )}
                     onClick={() => {
                         onSelect?.(user);
@@ -63,12 +59,12 @@ export const UserList: FC<{
                 >
                     <UserAvatar userInfo={user} size={36} />
                     <div className="flex flex-col gap-0.5 flex-1 overflow-hidden ">
-                        <div className="text-[14px] leading-[22px] font-medium text-[var(--ant-basic-8)] overflow-hidden text-ellipsis whitespace-nowrap">
+                        <div className="text-[14px] leading-[22px] font-medium text-basic-8 overflow-hidden text-ellipsis whitespace-nowrap">
                             {formatMemberName(user)}
                         </div>
-                        <div className="text-xs text-[var(--ant-basic--5)] overflow-hidden text-ellipsis whitespace-nowrap">
+                        <div className="text-xs text-basic-5 overflow-hidden text-ellipsis whitespace-nowrap">
                             {((user?.departmentList || [])?.length > 0 || user?.jobTitle) && (
-                                <div className="mt-0.5 text-[var(--ant-basic-5)] text-xs leading-4 text-ellipsis overflow-hidden whitespace-nowrap">
+                                <div className="mt-0.5 text-basic-5 text-xs leading-4 text-ellipsis overflow-hidden whitespace-nowrap">
                                     {user?.departmentList?.[0].name || ""}
                                     {!!user?.departmentList?.[0].name && !!user.jobTitle ? "-" : ""}
                                     {user.jobTitle || ""}

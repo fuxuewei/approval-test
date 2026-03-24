@@ -38,7 +38,7 @@ const tagVariants = cva(
 
 export interface TagProps
   extends React.HTMLAttributes<HTMLSpanElement>,
-    VariantProps<typeof tagVariants> {
+  VariantProps<typeof tagVariants> {
   children: React.ReactNode;
   removable?: boolean;
   onRemove?: () => void;
@@ -128,4 +128,10 @@ function TagGroup({
   );
 }
 
-export { Tag, TagGroup, tagVariants };
+function StatusTag({ className, children }: { className?: string, children: React.ReactNode }) {
+  return <div
+    className={cn('py-[3px] px-2 rounded-full bg-basic-2 text-xs w-fit', className)}>
+    {children}
+  </div>;
+}
+export { Tag, TagGroup, tagVariants, StatusTag };

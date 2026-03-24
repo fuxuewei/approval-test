@@ -6,18 +6,59 @@ globs: **/*.{tsx,jsx}
 # MuseDAM Final Validation & Quality Gate (Last Step)
 
 ## Trigger
-- Always run as the VERY LAST step before outputting any TSX code (after 00-08).
+
+- Always run as the VERY LAST step before outputting any TSX code, after the full MuseDAM workflow and prompt contract have been applied.
 
 ## Mandatory Checklist (AI must verify and report)
-1. Colors: 100% from globals.css variables? (no hard hex, no old Ant, no gray-xxx)
+
+1. Colors: use simplified Tailwind classes (`text-primary-6`, `bg-success-1`, etc.)? (no `text-[var(--xxx)]`, no hard hex)
 2. Spacing: only gap-*/p-* ? (no margin between siblings)
 3. Radius: Button/Input=6px, Card=8px, Modal=12px?
-4. Icons: from src/components/icons/ (Figma or lucide-react) + currentColor?
+4. Icons:
+    - 所有 `<Icon name>` 值与 Figma 原始 data-name 完全一致？
+    - `public/icons/` 中对应 SVG 文件存在？
+    - 无 `currentColor` 以外的硬编码颜色？
+    - 无 `lucide-react` 用于已有 Figma 图标的情况？
+
 5. Components: reused existing or correctly placed in domain folder? (07 mapper used)
 6. Typography: exact designer scale (22/32 H5, 14/22 body, etc.)?
 7. Dark mode: .dark class compatible + ThemeProvider used?
 8. Annotations: data-component="..." present for every major element?
 9. Responsive: w-full + max-w-7xl + no fixed 1440px?
 10. shadcn: all primitives from ui/ and styled with MuseDAM?
+11. Fidelity: typography quartet and non-standard spacing/effects either mapped or listed in `Unmapped tokens`?
+12. Visual validation:
+    - Figma screenshot captured?
+    - Local page screenshot captured with `playwright-mcp-server` when applicable?
+    - Any remaining visual diff explicitly described?
+
+13. Reuse manifest: reused components, new components, and non-reuse reasons clearly listed?
 
 ## Output Format (before code block)
+
+BEFORE outputting any code, MUST print the following checklist:
+
+```text
+✅ Colors: simplified classes text-primary-6, bg-success-1 (no arbitrary values)
+✅ Spacing: gap-* only (no margin)
+✅ Radius: Button=6px, Card=8px
+✅ Icons: all names match Figma data-name | all SVG files exist in public/icons/ | no hardcoded colors
+✅ Components: reused [List components used]
+✅ Typography: 14/22 body, 22/32 H5
+✅ Dark mode: .dark compatible
+✅ Annotations: data-component present
+✅ Responsive: w-full, no 1440px
+✅ shadcn: primitives from ui/
+✅ Fidelity: typography/effects mapped | unmapped tokens listed when needed
+✅ Visual validation: Figma screenshot checked | local screenshot checked | remaining diffs noted
+✅ Reuse manifest: reused components | new components | reasons
+```
+
+Then print these sections in order:
+
+1. `Reuse manifest`
+1. `Token mapping summary`
+1. `Unmapped tokens`
+1. `Visual diff notes`
+
+If ANY item fails, mark it ❌, fix it in code first, THEN output.
